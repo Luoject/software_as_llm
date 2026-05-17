@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.egg-info/
+.venv/
+venv/
+
+# HL artifacts (keep checkpoints + logs, skip frames)
+lunar_lander_HS/PPO_gif_images/
+lunar_lander_HS/PPO_gifs/
+lunar_lander_HS/HL_memory/policy_history/

@@ -1,0 +1,1951 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Beyond Gradients</title>
+  <meta name="description" content="Learning Beyond Gradients">
+  <meta itemprop="name" content="Learning Beyond Gradients">
+  <meta itemprop="description" content="Learning Beyond Gradients">
+  <meta itemprop="image" content="https://trinkle23897.github.io/learning-beyond-gradients/ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png">
+  <link rel="image_src" href="https://trinkle23897.github.io/learning-beyond-gradients/ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Learning Beyond Gradients">
+  <meta property="og:title" content="Learning Beyond Gradients">
+  <meta property="og:description" content="Learning Beyond Gradients">
+  <meta property="og:url" content="https://trinkle23897.github.io/learning-beyond-gradients/">
+  <meta property="og:image" content="https://trinkle23897.github.io/learning-beyond-gradients/ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
+  <meta property="og:image:alt" content="Learning Beyond Gradients">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Learning Beyond Gradients">
+  <meta name="twitter:description" content="Learning Beyond Gradients">
+  <meta name="twitter:image" content="https://trinkle23897.github.io/learning-beyond-gradients/ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png">
+  <meta name="twitter:image:alt" content="Learning Beyond Gradients">
+  <script>
+(function () {
+  const storageKey = 'learning_beyond_gradient_theme_v1';
+  let theme = null;
+  try {
+    const saved = window.localStorage.getItem(storageKey);
+    if (saved === 'light' || saved === 'dark') theme = saved;
+  } catch (_) {}
+  if (!theme && window.matchMedia) {
+    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  document.documentElement.dataset.theme = theme || 'light';
+})();
+
+  </script>
+  <style>
+:root {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --paper: #ffffff;
+  --ink: #111827;
+  --muted: #4b5563;
+  --line: #d9e2ec;
+  --accent: #0f766e;
+  --accent-2: #b45309;
+  --code-bg: #0f172a;
+  --code-ink: #e5e7eb;
+  --inline-code-bg: #edf2f7;
+  --toc-bg: #f8fafc;
+  --switch-bg: rgba(255, 255, 255, 0.94);
+  --active-bg: #111827;
+  --active-ink: #ffffff;
+  --details-bg: #fbfdff;
+  --summary-bg: #fff7ed;
+  --quote-bg: #f0fdfa;
+  --table-head-bg: #f1f5f9;
+  --media-bg: #ffffff;
+  --page-shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1120;
+  --paper: #111827;
+  --ink: #e5e7eb;
+  --muted: #a7b0c0;
+  --line: #2d3748;
+  --accent: #5eead4;
+  --accent-2: #fbbf24;
+  --code-bg: #020617;
+  --code-ink: #e5e7eb;
+  --inline-code-bg: #1f2937;
+  --toc-bg: #0f172a;
+  --switch-bg: rgba(17, 24, 39, 0.94);
+  --active-bg: #e5e7eb;
+  --active-ink: #111827;
+  --details-bg: #0f172a;
+  --summary-bg: #1f2937;
+  --quote-bg: #092f2d;
+  --table-head-bg: #172033;
+  --media-bg: #ffffff;
+  --page-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.72;
+}
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 28px 96px;
+  background: var(--paper);
+  min-height: 100vh;
+  box-shadow: var(--page-shadow);
+}
+.lang-switch-wrap {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+  margin: -30px 0 22px;
+}
+.top-controls {
+  pointer-events: auto;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+.lang-switch {
+  pointer-events: auto;
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--switch-bg);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(8px);
+}
+.lang-switch button,
+.theme-toggle {
+  min-width: 72px;
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 12px;
+  background: transparent;
+  color: var(--muted);
+  font: 700 14px/1 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+.theme-toggle {
+  border: 1px solid var(--line);
+  background: var(--switch-bg);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(8px);
+}
+.lang-switch button.active {
+  background: var(--active-bg);
+  color: var(--active-ink);
+}
+.lang-pane[hidden] { display: none !important; }
+h1, h2, h3, h4 {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+h1 { margin: 0 0 28px; font-size: 46px; max-width: 860px; }
+h2 { margin: 56px 0 18px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 30px; }
+h3 { margin: 34px 0 12px; font-size: 22px; }
+h4 { margin: 28px 0 10px; font-size: 19px; }
+h2, h3, h4 { scroll-margin-top: 78px; }
+.section-link {
+  margin-right: 0.35em;
+  color: var(--muted);
+  font-size: 0.82em;
+  font-weight: 700;
+  text-decoration: none;
+  opacity: 0.72;
+}
+.section-link:hover {
+  color: var(--accent);
+  opacity: 1;
+  text-decoration: underline;
+}
+p { margin: 18px 0; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+ul, ol { padding-left: 1.45em; }
+li { margin: 8px 0; }
+.toc {
+  margin: 24px 0 34px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--toc-bg);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.toc-title {
+  margin: 0 0 10px;
+  font-weight: 800;
+  color: var(--muted);
+}
+.toc ol { margin: 0; padding: 0; list-style: none; }
+.toc li { margin: 5px 0; line-height: 1.35; }
+.toc a { color: var(--ink); text-decoration: none; }
+.toc a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.toc-level-3 { padding-left: 1.25rem; font-size: 0.93em; }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: var(--inline-code-bg);
+  padding: 0.1em 0.28em;
+  border-radius: 4px;
+}
+pre { overflow-x: auto; margin: 22px 0; padding: 18px 20px; border-radius: 8px; background: var(--code-bg); color: var(--code-ink); line-height: 1.48; }
+pre code { background: transparent; color: inherit; padding: 0; border-radius: 0; font-size: 0.88em; }
+img, video { display: block; max-width: 100%; height: auto; margin: 26px auto; border: 1px solid var(--line); border-radius: 8px; background: var(--media-bg); }
+img[src="ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png"] { transition: filter 160ms ease, box-shadow 160ms ease; }
+:root[data-theme="dark"] img[src="ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png"] {
+  filter: invert(1) hue-rotate(180deg) saturate(0.9) brightness(1.04);
+}
+video { background: #0b1020; }
+details { margin: 24px 0 30px; border: 1px solid var(--line); border-radius: 8px; background: var(--details-bg); overflow: hidden; }
+summary { cursor: pointer; padding: 14px 18px; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 700; color: var(--accent-2); background: var(--summary-bg); border-bottom: 1px solid var(--line); }
+details > *:not(summary) { margin-left: 18px; margin-right: 18px; }
+details pre { margin: 18px; max-height: 70vh; }
+blockquote { margin: 24px 0; padding: 2px 20px; border-left: 4px solid var(--accent); color: var(--muted); background: var(--quote-bg); }
+table { border-collapse: collapse; width: 100%; margin: 24px 0; font-size: 0.94em; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+th { background: var(--table-head-bg); }
+.github-issue-comments {
+  margin: 28px 0 12px;
+  padding: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.github-comments-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+  padding: 0 0 13px;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 16px;
+}
+.github-comments-head > div:first-child {
+  min-width: 0;
+}
+.github-comments-count {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.05em;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.github-comments-subtitle,
+.github-comments-powered {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.82em;
+  line-height: 1.45;
+}
+.github-comments-controls {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: 8px;
+  align-items: center;
+  min-width: max-content;
+}
+.github-comments-new {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  color: var(--active-ink);
+  background: var(--active-bg);
+  font-size: 0.8em;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+}
+.github-comments-new:hover {
+  color: var(--active-ink);
+  opacity: 0.9;
+  text-decoration: none;
+}
+.github-comments-status,
+.github-comments-empty {
+  margin: 14px 0 0;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9em;
+}
+.github-comments-list {
+  display: grid;
+  gap: 0;
+  margin-top: 4px;
+}
+.github-comment {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 13px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.github-comment-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--toc-bg);
+  object-fit: cover;
+  margin: 1px 0 0;
+}
+.github-comment-main {
+  min-width: 0;
+}
+.github-comment-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: baseline;
+  color: var(--muted);
+  font-size: 0.82em;
+  line-height: 1.35;
+}
+.github-comment-author {
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+.github-comment-author:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.github-comment-title {
+  margin: 5px 0 0;
+  font-size: 1.02em;
+  line-height: 1.35;
+}
+.github-comment-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.github-comment-title a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.github-comment-body {
+  margin: 9px 0 0;
+  color: var(--ink);
+  font-size: 0.92em;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.github-comment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.github-comment-actions a,
+.github-comment-actions span {
+  color: var(--muted);
+  text-decoration: none;
+}
+.github-comment-actions a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.github-replies {
+  display: grid;
+  gap: 0;
+  margin-top: 14px;
+  padding-left: 14px;
+  border-left: 2px solid var(--line);
+}
+.github-reply {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  padding: 12px 0 0;
+}
+.github-reply-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--toc-bg);
+  object-fit: cover;
+  margin: 2px 0 0;
+}
+.github-reply-main {
+  min-width: 0;
+}
+.github-reply-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: baseline;
+  color: var(--muted);
+  font-size: 0.8em;
+  line-height: 1.35;
+}
+.github-reply-author {
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+.github-reply-author:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.github-reply-body {
+  margin: 6px 0 0;
+  color: var(--ink);
+  font-size: 0.88em;
+  line-height: 1.52;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.github-replies-error {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.82em;
+}
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+  .page { padding: 32px 18px 64px; box-shadow: none; }
+  .lang-switch-wrap { margin: 0 0 18px; top: 0; }
+  .lang-switch button { min-width: 66px; padding: 7px 10px; }
+  .theme-toggle { min-width: 62px; padding: 7px 10px; }
+  .github-comments-head { display: block; }
+  .github-comments-controls { justify-content: flex-start; margin-top: 10px; min-width: 0; }
+  .github-comments-new { margin-top: 0; }
+  .github-comment { grid-template-columns: 34px 1fr; gap: 10px; }
+  .github-comment-avatar { width: 34px; height: 34px; }
+  .github-replies { padding-left: 10px; }
+  .github-reply { grid-template-columns: 26px 1fr; gap: 8px; }
+  .github-reply-avatar { width: 26px; height: 26px; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 24px; }
+}
+
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="lang-switch-wrap" aria-label="Page controls">
+      <div class="top-controls">
+        <div class="lang-switch">
+          <button type="button" id="lang-en" class="active" aria-pressed="true">English</button>
+          <button type="button" id="lang-zh" aria-pressed="false">中文</button>
+        </div>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false">Dark</button>
+      </div>
+    </div>
+    <article id="article-en" class="lang-pane" lang="en">
+<h1>Learning Beyond Gradients</h1>
+<blockquote>
+<p><a href="https://trinkle23897.github.io/cv/">Jiayi Weng</a></p>
+</blockquote>
+<nav class="toc" aria-label="Contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li class="toc-level-2"><a href="#en-section-1">The Anomaly</a></li>
+      <li class="toc-level-2"><a href="#en-section-2">Heuristic Learning</a></li>
+      <li class="toc-level-2"><a href="#en-section-3">Why Heuristic Learning Did Not Take Off Earlier</a></li>
+      <li class="toc-level-2"><a href="#en-section-4">How Heuristic Learning Does Continual Learning</a></li>
+      <li class="toc-level-2"><a href="#en-section-5">The Complexity of Heuristic Systems</a></li>
+      <li class="toc-level-2"><a href="#en-section-6">The Next Paradigm?</a></li>
+      <li class="toc-level-2"><a href="#en-disclaimer">Disclaimer</a></li>
+      <li class="toc-level-2"><a href="#en-acknowledgements">Acknowledgements</a></li>
+      <li class="toc-level-2"><a href="#en-citation">Citation</a></li>
+      <li class="toc-level-2"><a href="#en-appendix">Appendix: Experiment Notes and Reproduction</a></li>
+      <li class="toc-level-3"><a href="#en-section-a-1">A.1 Experiment Notes</a></li>
+      <li class="toc-level-3"><a href="#en-section-a-2">A.2 Reproduction Entrypoints</a></li>
+      <li class="toc-level-2"><a href="#en-section-13">Comments</a></li>
+    </ol>
+  </nav>
+<p>Continual Learning has remained hard largely because of catastrophic forgetting in neural networks: learn something new, and old capabilities can get overwritten. But what if we do not put all of our attention on neural network weights? Is there another way to make progress?</p>
+<p>As LLM agents get stronger, coding gets faster and better. But the phenomenon I find more interesting is different: a coding agent can keep reading failures, editing code, adding tests, and watching replays, and a program system can improve without training a new network or updating weights.</p>
+<p>That made me rethink heuristics: hand-written rules and programmatic policies. Many heuristics were not useless; they were simply too expensive to maintain. Coding agents change that maintenance curve. Rules that used to be one-off patches may start to become code worth owning for the long term.</p>
+<p>Anything that can be iterated on continuously starts to become more solvable. That is also what Continual Learning has always wanted. Could this become the next paradigm after pretraining, RLHF, and large-scale RL/RLVR?</p>
+<h2 id="en-section-1"><a class="section-link" href="#en-section-1" aria-label="Link to The Anomaly">#</a>The Anomaly</h2>
+<p>While maintaining <a href="https://github.com/sail-sg/envpool">EnvPool</a> in my spare time, I wanted a cheaper way to test whether game environments were behaving correctly. Running a neural network every time was too expensive for CI.</p>
+<p>The initial question was:</p>
+<pre><code class="language-text">Can we write cheap, reproducible heuristics that are much stronger than a random policy,
+and use them to drive environments into informative states?
+</code></pre>
+<p>I tried using Codex (<code>gpt-5.4</code>) to write a rule-based version, with no neural network at all. After a few rounds, the results were far more surprising than I expected:</p>
+<ul>
+<li>In Atari Breakout, a programmatic policy went from <code>387 -&gt; 507 -&gt; 839 -&gt; 864</code>, eventually reaching the theoretical maximum score.</li>
+<li>In MuJoCo Ant, a pure Python policy first learned a rhythmic gait, then added short-horizon model planning, and finally reached <code>6000+</code>, in the range of common Deep RL results.</li>
+<li>In MuJoCo HalfCheetah, interpretable gait/posture rules plus online planning reached a five-episode evaluation mean of <code>11836.7</code>, also in the range of common Deep RL results.</li>
+<li>In VizDoom, a first-person visual-control task, cv2/NumPy screen CV without neural-network training reached <code>mean=557.0</code> and <code>min=440.0</code> over 10 seeds on D3 Battle.</li>
+<li>Across Atari57, I ran <code>57 games x 2 observation modes x 3 repeats = 342</code> coding-agent search trajectories. The results were uneven, but under a fixed environment-step budget, median HNS around <code>1M</code> environment steps was already far above PPO-style Deep RL baselines at the same step count.</li>
+</ul>
+<p>The raw scores were surprising enough. But the more interesting part was: Codex was not training a neural network. It was maintaining a software system that could keep growing.</p>
+<p>Breakout policy was far beyond "move left when the ball is on the left." The policy had grown action probes, state readers, ball and paddle detectors, landing prediction, stuck-loop detection, regression tests, video replays, and experiment logs. Ant policy was more than a gait formula too: it had rhythmic control, posture feedback, contact signals, and short-horizon model rollouts.</p>
+<p>That is when I felt a new concept was needed. The thing being updated was no longer just a policy function. It was a software system with memory, feedback channels, and regression mechanisms.</p>
+<h2 id="en-section-2"><a class="section-link" href="#en-section-2" aria-label="Link to Heuristic Learning">#</a>Heuristic Learning</h2>
+<p>After more iteration with Codex, I started calling this process <strong>Heuristic Learning (HL)</strong>:</p>
+<ul>
+<li>HL is built out of program code.</li>
+<li>Like Deep RL as commonly practiced today, it has a loop of state, action, feedback, and update; unlike that setup, the object being updated is software structure rather than neural-network parameters.</li>
+<li>Its feedback is consumed by a coding agent, and can come from environment reward, test cases, logs, videos, replays, or human feedback.</li>
+<li>Its updates do not use backpropagation. The coding agent directly edits policies, state detectors, tests, configuration, or memory.</li>
+<li>HL is the learning and update process. The object maintained by HL over time can be called a <strong>Heuristic System (HS)</strong>.</li>
+<li>An HS is more than an isolated <code>policy.py</code>. It contains at least a programmatic policy, state representation, feedback channels, experiment records, replays or tests, memory, and an update mechanism executed by a coding agent. A single rule is not enough. Rules, feedback, history, and the next update path all need to connect before it becomes an HS.</li>
+</ul>
+<p>As a table:</p>
+<table>
+<thead>
+<tr>
+<th>Axis</th>
+<th>Deep RL</th>
+<th>HL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy</td>
+<td>Neural network parameters</td>
+<td>Code: rules, state machines, controllers, MPC, macro-actions</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Usually explicit observations</td>
+<td>Usually explicit variables, detectors, caches, and other readable representations</td>
+</tr>
+<tr>
+<td>Action</td>
+<td>Produced by a neural network forward pass</td>
+<td>Produced by executing code logic</td>
+</tr>
+<tr>
+<td>Feedback</td>
+<td>Mainly fixed reward</td>
+<td>Provided through coding-agent context: tests, environment feedback, logs, and replays all count</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>Gradient-based updates to neural-network parameters in a Deep RL algorithm</td>
+<td>Direct code edits by a coding agent</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>On-policy methods basically have none; off-policy methods have replay buffers</td>
+<td>Can explicitly store trials, summaries, failure reasons, replays, and version diffs</td>
+</tr>
+</tbody>
+</table>
+<p>Heuristic Learning has several useful properties compared with Deep RL:</p>
+<ul>
+<li>Explainability: neural networks are hard to explain, while HL policies can often be translated into plain language.</li>
+<li>Sample Efficiency: one effective code update can jump directly to a new policy, rather than slowly climbing through learning-rate tuning.</li>
+<li>Regression-testability: old capabilities can become tests, replays, or golden cases.</li>
+<li>Overfitting can be constrained: code heuristics can still overfit to seeds, environment details, or test loopholes, but simplification, regression checks, and multi-seed evaluation provide an engineering form of regularization.</li>
+<li>It can avoid part of catastrophic forgetting: old capabilities do not have to live only inside model weights; they can be written into rule sets and tests.</li>
+</ul>
+<p>The point is that a class of heuristics that used to be too expensive to maintain may now be worth owning.</p>
+<h2 id="en-section-3"><a class="section-link" href="#en-section-3" aria-label="Link to Why Heuristic Learning Did Not Take Off Earlier">#</a>Why Heuristic Learning Did Not Take Off Earlier</h2>
+<p>If HL has ancestors, they are expert systems and rule systems. Before coding agents, their maintenance cost was brutal.</p>
+<p>Human-maintained heuristics easily turn into this:</p>
+<pre><code class="language-text">Add one rule today to fix case A.
+Tomorrow, case B breaks.
+Add another if-statement the day after.
+The day after that, nobody dares delete anything.
+</code></pre>
+<p>The problem was not that heuristics were useless. The problem was that humans could not afford to keep maintaining them. Maintaining expert systems by hand was a bit like spinning thread before the Industrial Revolution: one person can do it, but once the scale grows, stability and maintenance cost become crushing. Spinning machines changed the production curve; coding agents change the maintenance curve for heuristics. They act like a channel that can continuously deliver intelligence into a Heuristic System and let it keep evolving.</p>
+<p><img alt="coding agent connects feedback into software growth" src="ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png"></p>
+<p>The common agentic feedback loop today looks roughly like this:</p>
+<pre><code class="language-text">feature request -&gt; agent writes code -&gt; tests pass -&gt; human gives some feedback -&gt; next patch
+</code></pre>
+<p>As models improve, human intervention should shrink. In systems with clear boundaries, this feedback loop can start to close automatically, allowing HL to produce Heuristic Systems in bulk:</p>
+<pre><code class="language-text">environment feedback / test failure / log anomaly
+-&gt; coding agent reads context
+-&gt; edits policy / test / memory
+-&gt; reruns
+-&gt; writes results back into trials and summaries
+-&gt; continues to the next round
+</code></pre>
+<h2 id="en-section-4"><a class="section-link" href="#en-section-4" aria-label="Link to How Heuristic Learning Does Continual Learning">#</a>How Heuristic Learning Does Continual Learning</h2>
+<p>In neural networks, catastrophic forgetting happens when new data pushes parameters toward a new task and old capabilities get overwritten. HL can forget too, just in a more engineering-shaped way:</p>
+<ul>
+<li>A new rule fixes one failure mode and breaks an old scenario.</li>
+<li>A new memory repeatedly steers the agent in the wrong direction.</li>
+<li>A test is too narrow, so the policy learns to exploit it.</li>
+<li>A patch changes a shared interface, and old callers quietly break.</li>
+<li>Rules keep piling up until even the agent can no longer maintain the system.</li>
+</ul>
+<p>So HL does not automatically solve Continual Learning. It turns "avoiding forgetting" into a more engineering-oriented problem.</p>
+<p>In HL, old capabilities can be fixed into:</p>
+<ul>
+<li>regression tests;</li>
+<li>fixed-seed replays;</li>
+<li>golden traces;</li>
+<li>failure videos;</li>
+<li>version diffs;</li>
+<li>explicitly written-down failed directions.</li>
+</ul>
+<p>This is very different from compressing experience into neural network weights. HL history is explicit, readable, deletable, and refactorable. It is responsible for remembering, but also for compressing a pile of local patches into a simpler representation.</p>
+<p>(An HS that only grows and never compresses will eventually become a big ball of mud. It may "remember" many things, but the form of memory is so poor that nobody dares touch it, and the system decays.)</p>
+<p>A healthy HS therefore needs at least two operations:</p>
+<ol>
+<li>Absorb feedback: write new failures, logs, and rewards back into the system.</li>
+<li>Compress history: fold local patches back into simpler, more maintainable representations.</li>
+</ol>
+<p>That turns Continual Learning from "how do we update parameters?" into "how do we maintain a software system that keeps absorbing feedback?"</p>
+<h2 id="en-section-5"><a class="section-link" href="#en-section-5" aria-label="Link to The Complexity of Heuristic Systems">#</a>The Complexity of Heuristic Systems</h2>
+<p>Here I define <strong>coupling complexity</strong> as the level of strategy complexity a coding agent can maintain in order to support HL. More concretely, it is how many interdependent states, rules, tests, feedback signals, and historical constraints an update has to account for at the same time.</p>
+<p>This cannot be measured by lines of code. A 500-line policy with clean module boundaries, good tests, reproducible state, and clear logs may be easy to maintain. An 80-line policy where every line affects every other line, with no logs or replays, may be a time bomb.</p>
+<p>On the code side, coupling complexity is bounded by module boundaries, interface stability, test coverage, observability, rollback cost, and state reproducibility. Good modularity cuts global coupling into local coupling, reducing the complexity an agent must hold in its head. Good tests let the coding agent avoid simulating the whole system mentally on every change.</p>
+<p>On the coding-agent side, coupling complexity depends on model capability, context length, memory quality, tool quality, and iteration speed. A stronger model can handle more interactions at once. Longer context means fewer lost threads. Memory preserves experience across rounds. Search, localization, execution, and replay tools move part of the cognitive load outside the model.</p>
+<p>Putting the two sides together gives a few working hypotheses:</p>
+<ul>
+<li>Clearer feedback increases the coupling complexity that a fixed amount of agent intelligence can maintain.</li>
+<li>With the same tools and feedback, stronger models can handle higher coupling complexity.</li>
+<li>Modularity, tests, and replays move part of the coupling complexity into the environment.</li>
+<li>Memory and tools increase the agent's effective context.</li>
+<li>An HS that only grows and never compresses will keep increasing coupling complexity until it exceeds maintenance capacity.</li>
+</ul>
+<p>Breakout policy reaching the full <code>864</code> score is partly because the rules are simple, but also because failures can be replayed on video, locally reproduced, and regression-tested. Ant is much more complex, but it decomposes into rhythm, posture, contact, and residual MPC modules.</p>
+<p>Montezuma is a useful counterexample. In Atari57, one unattended run reached <code>400</code> points, but the route consisted of <code>86</code> macro-actions and was basically open-loop execution. That example shows that some environments need stronger program forms: composable macro-actions, recoverable search state, and long-term memory. Plain <code>if else</code> cannot solve everything.</p>
+<h2 id="en-section-6"><a class="section-link" href="#en-section-6" aria-label="Link to The Next Paradigm?">#</a>The Next Paradigm?</h2>
+<p>The current paradigm shift has gone from pretraining to RLHF, and then to large-scale RL / RLVR. Anything that can be verified starts to become solvable.</p>
+<p>Online Learning and Continual Learning can be partially addressed by agents produced by RLVR, through Heuristic Learning. From that perspective, I would call it a candidate for the next paradigm: anything that can be continuously iterated on starts to become solvable.</p>
+<p>Why only partially? Because Heuristic Learning cannot do everything neural networks can do. It is bounded by what code can express, especially in complex perception and long-horizon generalization. With what I know today, I cannot imagine an agent writing pure Python code, without a neural network, to solve ImageNet.</p>
+<p>The real question is how to combine neural networks and HL to address Online Learning and Continual Learning together. The most promising direction seems to be: use HL to process online data quickly, turn online experience into trainable, regression-testable, filterable data, and then periodically update the neural network.</p>
+<p>Take robotics as an example. If we borrow the System 1 / System 2 language, one possible division of labor is:</p>
+<ul>
+<li>Specialized shallow NNs: part of System 1, fast and cheap, responsible for perception, classification, and object-state estimation.</li>
+<li>HL: also part of System 1, responsible for fresh data handling, rules, tests, replays, memory, safety boundaries, and local recovery.</li>
+<li>LLM agent: System 2, responsible for giving feedback to HL, improving data, and periodically extracting HL-generated data to update itself.</li>
+</ul>
+<p>This can be further decomposed into a hierarchy:</p>
+<pre><code class="language-text">joint-level HL -&gt; limb-level HL -&gt; whole-body balance HL -&gt; task-level HL
+</code></pre>
+<p>Lower levels handle safety and low-latency control. Middle levels handle gait and contact. Higher levels handle tasks, recovery, and long-term memory. The coding agent does not necessarily "understand walking" directly. It is more like an update pipeline inserted into the system: continuously feeding failure videos, sensor streams, simulation results, and test results into the system, then rewriting the feedback into code, parameters, guard rules, and memory.</p>
+<p>LLM agents can share what they learn, or they can learn inside robotics in isolated branches. The open problem is how the <em>specific data distribution</em> produced by HL can avoid destabilizing the LLM's periodic updates. This is a classic post-training problem, and there is already a lot of mature experience here. For reasons, I will not expand on it in this post.</p>
+<p>Agentic coding changes the speed of writing code. It also changes which code is worth owning for the long term.</p>
+<p>Many heuristics looked hopeless because the real issue was maintenance cost. They were not necessarily too weak. Coding agents change that maintenance curve. Rules, tests, logs, memory, and patches used to be scattered engineering materials. Now they can become a continuously updated Heuristic System, one that can genuinely address problems Online Learning and Continual Learning have struggled to solve.</p>
+<p>Welcome to the next paradigm.</p>
+<h2 id="en-disclaimer"><a class="section-link" href="#en-disclaimer" aria-label="Link to Disclaimer">#</a>Disclaimer</h2>
+<p>This article represents only my personal views. It does not represent any company position, and the discussion here is unrelated to any specific company project, product plan, or internal work.</p>
+<h2 id="en-acknowledgements"><a class="section-link" href="#en-acknowledgements" aria-label="Link to Acknowledgements">#</a>Acknowledgements</h2>
+<p>Thanks to <a href="https://costa.sh/">Costa Huang</a>, <a href="https://tairanhe.com/">Tairan He</a>, and <a href="https://hsheng.org">Hao Sheng</a> for feedback.</p>
+<h2 id="en-citation"><a class="section-link" href="#en-citation" aria-label="Link to Citation">#</a>Citation</h2>
+<p>If you need to cite this article in LaTeX, you can use the BibTeX below.</p>
+<pre><code class="language-bibtex">@misc{weng2026learning_beyond_gradients,
+  title = {Learning Beyond Gradients},
+  author = {Weng, Jiayi},
+  year = {2026},
+  month = may,
+  howpublished = {\url{https://trinkle23897.github.io/learning-beyond-gradients/}},
+  note = {Blog post}
+}
+</code></pre>
+<h2 id="en-appendix"><a class="section-link" href="#en-appendix" aria-label="Link to Appendix: Experiment Notes and Reproduction">#</a>Appendix: Experiment Notes and Reproduction</h2>
+<p>The full artifact repository is <a href="https://github.com/Trinkle23897/learning-beyond-gradients">https://github.com/Trinkle23897/learning-beyond-gradients</a>. The commands below assume you have cloned that repo and are running them from the repository root. The GitHub Pages site only serves the article and the static files it references; the full scripts, CSVs, videos, and experiment artifacts live in the repo.</p>
+<p>The Codex model used in the experiments below was <code>gpt-5.4</code>; newer model versions have not been tested yet. The experiment reports below were written by Codex itself.</p>
+<h3 id="en-section-a-1"><a class="section-link" href="#en-section-a-1" aria-label="Link to A.1 Experiment Notes">#</a>A.1 Experiment Notes</h3>
+<p>At first I simply asked Codex: "Write a strategy that solves Breakout." The result was mediocre. A low score is not very informative: the action semantics could be wrong, the state detector could be wrong, the evaluation setup could be wrong, or the policy structure itself could be weak. Later I changed the task shape: do not just hand me a <code>policy.py</code>; maintain a complete loop.</p>
+<p>The loop looked roughly like this:</p>
+<pre><code class="language-text">probe actions and observations
+-&gt; write state detectors
+-&gt; write policy
+-&gt; run full episodes
+-&gt; record trials.jsonl and summary.csv
+-&gt; generate videos or curves
+-&gt; inspect failure modes
+-&gt; edit policy
+-&gt; simplify code and run regressions
+</code></pre>
+<p>At that point, the task had changed shape. The output was no longer just a policy file. It was an experimental system that could keep being modified. It had probes, records, replays, failure modes, and clues for the next round.</p>
+<h4 id="en-breakout"><a class="section-link" href="#en-breakout" aria-label="Link to Breakout">#</a>Breakout</h4>
+<p>Related artifacts: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout.py">heuristic_breakout.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_trials.jsonl">heuristic_breakout_trials.jsonl</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_trials_summary.csv">heuristic_breakout_trials_summary.csv</a>.</p>
+<p>Breakout looks like a geometry problem: where is the ball, where is the paddle, and where will the ball land after bouncing off the wall? The hard part comes later. The policy can keep returning the ball, but stop hitting new bricks, trapping the score in a stable loop.</p>
+<p>In the first round, Codex confirmed the action space and observation shape, then found the paddle, ball, and brick colors from RGB frames, and used those image labels to scan 128 RAM bytes. Early experiment records looked like this:</p>
+<pre><code class="language-text">trial_name                 score   cumulative_env_steps   note
+shape_action_probe          -      32                     inspect obs/info/action
+ram_byte_corr_probe_v1      -      5,032                  correlate RAM bytes
+ram_fit_action_probe_v2     -      9,532                  action 2=right, 3=left
+baseline_v0                99      16,303                 initial RAM intercept
+tunnel0_v1                387      43,303                 no tunnel offset
+</code></pre>
+<p><code>387</code> is the kind of local high score that can fool you. The policy was already good at returning the ball, but it sent the ball into a periodic route: it would not die, but it would not clear more bricks either. A human writing by hand might keep tuning "return accuracy." Codex inspected the video and the last few dozen steps of trace, then localized the issue to a lack of perturbation in the ball trajectory.</p>
+<video controls src="atari/breakout/heuristic_breakout_score387_tunnel0_render210x160.mp4" width="360"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_score387_tunnel0_render210x160.mp4">heuristic_breakout_score387_tunnel0_render210x160.mp4</a>.</p>
+<p>The first effective mechanism was loop breaking: if there had been no reward for a long time, periodically add an offset to the predicted landing point and knock the ball out of the local cycle. That moved the score from <code>387</code> to <code>507</code>.</p>
+<pre><code class="language-python">if steps_since_reward &gt;= stuck_trigger_steps:
+    phase = stuck_offset_index % 4
+    if phase == 0:
+        offset = +stuck_offset_px
+    elif phase == 1:
+        offset = -stuck_offset_px
+    elif phase == 2:
+        offset = +0.5 * stuck_offset_px
+    else:
+        offset = -0.5 * stuck_offset_px
+else:
+    offset = 0.0
+</code></pre>
+<video controls src="atari/breakout/heuristic_breakout_score507_stuckbreaker_render210x160.mp4" width="360"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_score507_stuckbreaker_render210x160.mp4">heuristic_breakout_score507_stuckbreaker_render210x160.mp4</a>.</p>
+<p>Then another failure mode appeared. For a fast low ball, chasing the ordinary intercept made the paddle over-lead and drift away. Codex added <code>fast_low_ball_lead_steps=3</code>, and the score jumped from <code>507</code> to <code>839</code>.</p>
+<pre><code class="language-python">if vy &gt; 0.1 and ball_y &lt;= paddle_y:
+    steps_to_paddle = max((paddle_y - ball_y) / vy, 0.0)
+    intercept_x = reflect_position(ball_x + vx * steps_to_paddle)
+    target_x = intercept_x + stuck_offset
+elif vy &gt;= fast_ball_min_vy:
+    target_x = ball_x + fast_low_ball_lead_steps * vx
+else:
+    target_x = ball_x + chase_lead_steps * vx
+</code></pre>
+<video controls src="atari/breakout/heuristic_breakout_score839_fastlead_render210x160.mp4" width="360"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_score839_fastlead_render210x160.mp4">heuristic_breakout_score839_fastlead_render210x160.mp4</a>.</p>
+<p>The move from <code>839</code> to <code>864</code> was more like caring for a system that had already become complex. Codex tried deadbands, serve offsets, stuck offsets, brick-balance bias, and lookahead steps. Many directions did nothing. The final useful change was a late-game condition: after the first wall of bricks, the stuck offset only applies when the ball is still far from the paddle; when the ball is close, the offset is gradually released, otherwise the last few bricks pull the paddle away. It also added a tiny paddle-drift compensation for the one-step delay between action and paddle position.</p>
+<pre><code class="language-python">if score &gt;= 432 and stuck_release_horizon_steps &gt; 0:
+    release_ratio = clip(steps_to_paddle / stuck_release_horizon_steps, 0.0, 1.0)
+    offset *= release_ratio
+
+if score &gt;= 432 and ball_y &gt;= 170 and last_action == RIGHT:
+    control_paddle_x = paddle_x + 2.0
+elif score &gt;= 432 and ball_y &gt;= 170 and last_action == LEFT:
+    control_paddle_x = paddle_x - 2.0
+</code></pre>
+<video controls src="atari/breakout/heuristic_breakout_ci3985ae2_score864_render210x160.mp4" width="360"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_ci3985ae2_score864_render210x160.mp4">heuristic_breakout_ci3985ae2_score864_render210x160.mp4</a>.</p>
+<p>The final RAM default configuration verified at <code>864 / 864 / 864</code> across three episodes. Later, Codex migrated the same geometry controller back to pure image input: no RAM, only RGB segmentation for paddle, ball, and brick balance. The image-only version first scored <code>310</code>, then <code>428</code>, and finally reached <code>864</code> for the first time after seven local policy episodes, corresponding to <code>14,504</code> local policy environment steps, after lowering the threshold for the late-game "release stuck offset" behavior so it applied throughout.</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_sample_efficiency.png"><img alt="Breakout sample efficiency" src="atari/breakout/heuristic_breakout_sample_efficiency.png"></a></p>
+<p>This should not be described as "image-only from scratch to max score in 14.5K steps." The real process was that Codex first discovered the geometry controller, loop breaker, and late-game offset release in the RAM version. Once the structure was stable, it swapped the state-reading layer from RAM to RGB detectors. The <code>14.5K</code> number is the transfer budget for the image-only version.</p>
+<h4 id="en-ant-and-halfcheetah"><a class="section-link" href="#en-ant-and-halfcheetah" aria-label="Link to Ant and HalfCheetah">#</a>Ant and HalfCheetah</h4>
+<p>Related artifacts: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant.py">heuristic_ant.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/ant_envpool.xml">ant_envpool.xml</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_trials.jsonl">heuristic_ant_trials.jsonl</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_trials_summary.csv">heuristic_ant_trials_summary.csv</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_v5.py">heuristic_halfcheetah_v5.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_v5_log.md">heuristic_halfcheetah_v5_log.md</a>.</p>
+<p>Ant gives a different signal from Breakout. Breakout has intuitive geometry. Ant is continuous control, with 8 joint actions, and its failures are body dynamics rather than "missed the ball."</p>
+<p>I did not specify "use CPG" or "use MPC" at the beginning. The constraints were simply: do not train a neural network, make it locally reproducible, leave records for each round, and keep pushing the score up. Codex first read the EnvPool/Gymnasium Ant observations and rewards, confirmed action order, root velocity, torso orientation, joint positions, and joint velocities, then proposed the first rhythmic gait on its own.</p>
+<p>The first version was a four-leg phase oscillator: left and right legs in opposite phase, hip and ankle joints tracking sinusoidal target angles, with actions produced by a PD controller. It was not elegant, but it was already much stronger than random: the mean score over five random seeds was <code>2291</code>.</p>
+<pre><code class="language-python">leg_phase = warp_phase(phase + LEG_PHASE, stance_duty(vx))
+stance = leg_phase &lt; pi
+
+hip_wave = HIP_BIAS + stance_or_swing_scale * (
+    HIP_AMP * sin(leg_phase)
+    + HIP_H2_AMP * sin(2 * leg_phase + HIP_H2_PHASE)
+    + HIP_H3_AMP * sin(3 * leg_phase + HIP_H3_PHASE)
+)
+
+action[0::2] = KP * (
+    HIP_SIGN * hip_wave
+    + HEADING_AXIS * (YAW_GAIN * yaw + YAW_RATE_GAIN * yaw_rate)
+    - q[0::2]
+)
+action[1::2] = KP * (ANKLE_SIGN * (ankle_wave + balance) - q[1::2])
+</code></pre>
+<p>The early iterations looked like tuning a real controller: add yaw feedback to reach <code>2718</code>, retune phase speed, hip/ankle amplitude, and yaw angular-velocity gain to reach <code>3025</code>, then add second/third harmonics to reach <code>3162</code>. Codex also tried broad parameter search, but it did not reliably beat the current rhythmic policy, so it stopped expanding the search budget and moved to a different representation.</p>
+<p>The jump came from residual MPC. Roughly speaking, MPC is "think a short distance into the future while walking." Keep the rhythmic gait as the base reflex; at each real environment step, sample dozens of small residual action sequences inside a local MuJoCo model, score them, execute only the first residual action, then reobserve and replan on the next step, using the unfinished previous plan as a warm start.</p>
+<p>This way, the policy does not plan all 8 joints from scratch at every step. It starts with a stable gait, then uses short-horizon model planning to correct it.</p>
+<pre><code class="language-python">base = cpg_action(phase, q, dq, roll, pitch, yaw, rates, contacts, vx)
+
+best_plan = previous_plan.copy()
+best_obj = rollout_objective(obs, best_plan)
+for _ in range(CANDIDATES - 1):
+    residuals = clip(
+        best_plan + rng.normal(0.0, MPC_SIGMA, size=(HORIZON, 8)),
+        -MPC_CLIP,
+        MPC_CLIP,
+    )
+    residuals[1:] = 0.6 * residuals[1:] + 0.4 * residuals[:-1]
+    obj = rollout_objective(obs, residuals)
+    if obj &gt; best_obj:
+        best_obj = obj
+        best_plan = residuals
+
+plan[:-1] = PLAN_DECAY * best_plan[1:]
+return clip(base + best_plan[0], -1.0, 1.0)
+</code></pre>
+<pre><code class="language-text">trial_name                               score_mean   cumulative_env_steps   note
+ant_lr_cpgpd_v1                         2291.9       5,000                  left/right anti-phase CPG + PD
+ant_yawaxis_grid_v2                     2857.9       20,000                 yaw feedback + retuned params
+ant_h3_428_v1                           3162.0       50,000                 second/third harmonics
+ant_mpc_residual_v1_ep1                 3635.5       62,000                 horizon=6, candidates=32
+ant_mpc_residual_cfg4_eval5             3964.7       67,000                 horizon=8, candidates=48
+ant_mpc_residual_cand07_eval5           4647.1       73,000                 local search around MPC config
+ant_mpc_residual_narrow04_eval5         4871.3       79,000                 lower z target, larger kp/candidate count
+ant_mpc_residual_warm02_eval5           5165.2       85,000                 warm-start residual plan
+ant_mpc_fast065x060_sigma008_clip012    5759.4       95,000                 faster gait + larger residual
+ant_mpc_term001_ep1                     6054.5       100,000                terminal velocity cost
+ant_mpc_default_adaptive_ep1            6146.2       106,300                speed-adaptive phase + stance
+</code></pre>
+<p>By the end, the policy had oscillator phase, stance ratio, speed adaptation, roll/pitch/yaw feedback, foot contact, short-horizon model rollouts, residual smoothing, terminal velocity cost, and warm-start plan decay. A human can write one or two of these modules, of course. But handling experiment records, code, videos, and failure directions at the same time, under a short iteration budget, is a different level of difficulty.</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_sample_efficiency.png"><img alt="Ant sample efficiency" src="mujoco/ant/heuristic_ant_sample_efficiency.png"></a></p>
+<video controls src="mujoco/ant/heuristic_ant_mpc_default_6146_render480.mp4" width="480"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_mpc_default_6146_render480.mp4">heuristic_ant_mpc_default_6146_render480.mp4</a>.</p>
+<p>HalfCheetah is another point of evidence in the same family. I reran a five-episode evaluation of <code>mpc-staged-tree-asym-pd-cpg</code> with seeds <code>100..104</code>; the mean was <code>11836.7</code>, with min <code>11735.0</code> and max <code>12041.2</code>. The policy uses interpretable gait/posture rules and online staged-tree MPC: first form a high-scoring gait through CPG/PD, then use short-horizon model scoring and a staged swing-amplitude schedule to adjust actions.</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_sample_efficiency.png"><img alt="HalfCheetah sample efficiency" src="mujoco/halfcheetah/heuristic_halfcheetah_sample_efficiency.png"></a></p>
+<h4 id="en-vizdoom"><a class="section-link" href="#en-vizdoom" aria-label="Link to VizDoom">#</a>VizDoom</h4>
+<p>Related artifacts: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d1_cv.py">heuristic_vizdoom_d1_cv.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d3_cv.py">heuristic_vizdoom_d3_cv.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/record_vizdoom_d3_cv.py">record_vizdoom_d3_cv.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d1_cv_10seed_render_35fps.mp4">d1_cv_10seed_render_35fps.mp4</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d3_cv_best_10seed_render_35fps.mp4">d3_cv_best_10seed_render_35fps.mp4</a>.</p>
+<p>D1 Basic is the small experiment that first checks whether waiting to collect the medikit at the right time can get close to the reward ceiling. I first used a stronger object/info policy to validate the behavioral ceiling, which reached about <code>1.01</code> over 10 seeds; then I removed the non-reproducible information and kept only pip EnvPool, screen pixels from <code>render()</code>, and the public <code>HEALTH</code> variable. The final pure-CV version finds the medikit with brightness thresholding, morphological close/dilate, and connected components, then uses the bounding-box center to decide turning or moving forward. If health is still high and the medikit is already close, it stages in place and waits until health has decayed before collecting it. Over 10 seeds it reaches <code>mean=0.9441</code>, <code>min=0.2900</code>.</p>
+<video controls src="vizdoom/d1_cv_10seed_render_35fps.mp4" width="480"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d1_cv_10seed_render_35fps.mp4">d1_cv_10seed_render_35fps.mp4</a>.</p>
+<p>D3 Battle is closer to an FPS smoke policy. It is not a memorized map route; it decomposes behavior into three loops: kill monsters when visible, seek supplies when health or ammo is low, and explore quickly when no target is visible. On the screen side it uses cv2/NumPy color thresholds and connected components to extract enemy candidates, ammo/health item candidates, and dark-region ratios for walls and doorways. From EnvPool info it only uses public game variables such as <code>HEALTH</code>, <code>AMMO2</code>, <code>HITCOUNT</code>, <code>DAMAGECOUNT</code>, and <code>KILLCOUNT</code>. The iteration loop was to run 10 seeds in parallel, record a 35fps 10-grid video directly through <code>render()</code>, and inspect the failure modes. Early versions tried map access, object info, and seed-specific branches; those were removed. The final version keeps screen CV plus public variables as the closed-loop controller. Over 10 seeds it reaches <code>mean=557.0</code>, <code>min=440.0</code>.</p>
+<video controls src="vizdoom/d3_cv_best_10seed_render_35fps.mp4" width="480"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d3_cv_best_10seed_render_35fps.mp4">d3_cv_best_10seed_render_35fps.mp4</a>.</p>
+<h4 id="en-atari57"><a class="section-link" href="#en-atari57" aria-label="Link to Atari57">#</a>Atari57</h4>
+<p>Related artifacts: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_prompt_template.txt">atari57_prompt_template.txt</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_aggregate_curve_steps.csv">atari57_aggregate_curve_steps.csv</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_env_mode_summary.csv">atari57_env_mode_summary.csv</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/openrl_atari57_per_game_hns_comparison.csv">openrl_atari57_per_game_hns_comparison.csv</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_hns_normalization_inferred.csv">atari57_hns_normalization_inferred.csv</a>.</p>
+<p>Breakout and Ant are single-point stories. Atari57 asks what remains when the workflow leaves a few pretty examples. The setup was direct: run the same Codex workflow over the full Atari57 suite, with both <code>ram</code> and <code>native_obs</code> observation modes for every environment, and three independent repeats for each mode:</p>
+<pre><code class="language-text">57 games x 2 observation modes x 3 repeats = 342 coding-agent search trajectories
+</code></pre>
+<p>No human gave step-by-step hints during this batch. Each agent received the same template and different <code>ENV_ID / OBS_MODE / REPEAT_INDEX</code>, then ran until it stopped. Each run had to write <code>policy.py</code>, <code>trials.jsonl</code>, <code>summary.csv</code>, <code>sample_efficiency.png</code>, and <code>README.md</code>.</p>
+<p>The full prompt is in <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_prompt_template.txt">atari57_prompt_template.txt</a>. The core summary was:</p>
+<details>
+<summary>Atari57 batch prompt summary</summary>
+<pre><code class="language-text">Goal: for one EnvPool Atari environment and one OBS_MODE, design and iterate a handwritten heuristic policy.
+
+Run style: do not ask for confirmation and do not report intermediate progress; continue until a stop rule is met, then summarize.
+
+Hard constraints:
+- Do not train a neural network.
+- Do not read environment source, tests, ROM details, or hidden state.
+- In native_obs mode, only use obs returned by reset/step.
+- In ram mode, info[&quot;ram&quot;] is allowed.
+- Atari initialization parameters are fixed, including frame_skip=1, reward_clip=False, sticky action=0.
+- All actual environment steps used for probe/debug/trial must count toward cumulative_env_steps.
+
+Output files:
+- policy.py: the current best heuristic, simplified where possible.
+- trials.jsonl: score, environment steps, config, and notes for every trial.
+- summary.csv: aggregate from trials.
+- sample_efficiency.png: score curve by environment step and episode.
+- README.md: best score, reproduction command, failed directions, and stop reason.
+
+Stop rules:
+- Atari frame budget = 20,000,000.
+- Do not stop before budget just because the score has plateaued or exceeded a reference.
+- After every new best score, simplify the code and verify that the score does not regress before keeping it.
+</code></pre>
+</details>
+<p>First look at environment-step curves. HNS means human-normalized score: each game's score is normalized against the human baseline before comparison. In the fully unattended batch, <code>native_obs</code> Atari median HNS reached <code>0.32</code> around <code>1M</code> steps, and <code>ram</code> reached <code>0.26</code>, clearly above the early PPO2 / CleanRL EnvPool PPO curves in the figure. Around <code>9.7M</code> steps, <code>native_obs</code> reached <code>0.81</code> and <code>ram</code> reached <code>0.59</code>. In the same comparison, the OpenRL Benchmark PPO2 / CleanRL EnvPool PPO median HNS curves are roughly <code>0.88 / 0.92</code> at <code>10M</code> steps.</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_openrl_sample_efficiency_context.png"><img alt="Atari57 sample efficiency vs OpenRL Benchmark" src="atari/atari57/atari57_openrl_sample_efficiency_context.png"></a></p>
+<p>This comparison is about environment interaction efficiency. It does not convert the cost of the coding agent reading logs, writing code, and watching videos into the total compute budget. The signal is still concrete: a very rough coding-agent batch workflow, with no human inspection of intermediate results, already pushes the Atari57 median into the neighborhood of these baselines.</p>
+<p>If we aggregate by taking the best input mode for each game at the end, Codex median HNS is <code>0.83</code>, OpenAI Baselines PPO2 is <code>0.80</code>, and CleanRL EnvPool PPO is <code>0.98</code>. If we relax further to best single run, Codex median HNS is <code>1.18</code>. This does not replace a strict training-curve comparison, but it shows more directly what level the unattended search eventually covered.</p>
+<p>Aggregate curves compress differences into one median, so I also looked at per-game HNS. On Breakout, Krull, DoubleDunk, Boxing, and DemonAttack, both heuristics and Deep RL baselines reach scores well above the human baseline. On Asterix, Jamesbond, Centipede, Bowling, Skiing, and Tennis, heuristics are relatively strong. On Atlantis, VideoPinball, UpNDown, Assault, RoadRunner, and StarGunner, PPO is clearly much stronger.</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_per_game_hns_comparison.png"><img alt="Atari57 per-game HNS comparison" src="atari/atari57/atari57_per_game_hns_comparison.png"></a></p>
+<p>The most interesting part of Atari57 is that the source of sample efficiency changes. Traditional neural-network Atari learning has to relearn representation, credit assignment, and action meaning from high-dimensional inputs in every environment. Codex instead decomposes each environment into small maintainable program systems: aiming and dodging in shooters, bounce prediction in catching games, position rules in avoidance games, wrapper details, and each environment's own failed-experiment records.</p>
+<h4 id="en-montezuma"><a class="section-link" href="#en-montezuma" aria-label="Link to Montezuma">#</a>Montezuma</h4>
+<p>Related artifacts: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma.py">heuristic_montezuma.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_state_graph_search.py">heuristic_montezuma_state_graph_search.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_policy.py">heuristic_montezuma_400_policy.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_macros.json">heuristic_montezuma_400_macros.json</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_metadata.json">heuristic_montezuma_400_metadata.json</a>.</p>
+<p>Some environments are not a good fit for ordinary reactive heuristic policies. Montezuma's Revenge is the typical example.</p>
+<p>In an earlier standalone Montezuma search, state-graph search moved the key distance from <code>72</code> to <code>28</code>, but reward stayed at <code>0</code>. Later, in the Atari57 native-image batch, one unattended Codex run reached <code>400.0</code> points: the repaired best replay was <code>repair_replay_r1_t19734</code>, seed <code>10001</code>, using <code>1769</code> environment steps. It is essentially an open-loop route made of <code>86</code> macro-actions.</p>
+<video controls src="atari/montezuma/montezuma_400_render_seed10001_h264.mp4" width="360"></video>
+
+<p>Video artifact: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/montezuma_400_render_seed10001_h264.mp4">montezuma_400_render_seed10001_h264.mp4</a>.</p>
+<p>Montezuma exposes an expressivity problem. A normal <code>policy.py</code> state machine has trouble representing this kind of route: actions must align with timing, failures need recovery, and intermediate states need ways to re-enter the plan. Some environments need composable macro-actions, recoverable search state, and perhaps a program structure better suited to long-horizon planning than ordinary <code>if else</code>.</p>
+<p>This kind of failure is valuable for HL. It tells us where the boundary is, and hints at the next layer of abstraction. Some feedback needs a new representation and a new program form before it can enter the system. For Montezuma, the next interface probably needs macro-actions, recoverable state, search, and long-term memory.</p>
+<h3 id="en-section-a-2"><a class="section-link" href="#en-section-a-2" aria-label="Link to A.2 Reproduction Entrypoints">#</a>A.2 Reproduction Entrypoints</h3>
+<p>The commands below assume they are run from this article's directory, with dependencies already installed from <code>requirements.txt</code>. They check the representative results discussed above.</p>
+<h4 id="en-pong-21"><a class="section-link" href="#en-pong-21" aria-label="Link to Pong 21">#</a>Pong 21</h4>
+<p>Reproduction entrypoint: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/pong/heuristic_pong.py">heuristic_pong.py</a>.</p>
+<pre><code class="language-bash">python atari/pong/heuristic_pong.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0
+</code></pre>
+<p>Expected output should include <code>episode=0 score=21.0</code> and <code>mean=21.000</code>.</p>
+<h4 id="en-breakout-intermediate-nodes"><a class="section-link" href="#en-breakout-intermediate-nodes" aria-label="Link to Breakout Intermediate Nodes">#</a>Breakout Intermediate Nodes</h4>
+<p>These commands reproduce the <code>387 -&gt; 507 -&gt; 839</code> intermediate nodes discussed in the appendix. They are not the final policy; they pin down the mechanisms that made each jump happen.</p>
+<details>
+<summary>Reproduce 387: return the ball, but do not break the loop</summary>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_387.jsonl /tmp/repro_breakout_387.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 27000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 1000000000 \
+  --stuck-trigger-steps 1000000000 \
+  --stuck-switch-steps 0 \
+  --stuck-offset 0 \
+  --stuck-release-horizon-steps 0 \
+  --brick-balance-bias-min-score 1000000000 \
+  --late-game-paddle-lag-px 0 \
+  --trial-name repro_breakout_387 \
+  --log-path /tmp/repro_breakout_387.jsonl \
+  --summary-path /tmp/repro_breakout_387.csv
+</code></pre>
+<p>Expected output should include <code>score=387.0</code> and <code>mean=387.000</code>.</p>
+</details>
+<details>
+<summary>Reproduce 507: add stuck-loop perturbation</summary>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_507.jsonl /tmp/repro_breakout_507.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 27000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 1000000000 \
+  --stuck-trigger-steps 1024 \
+  --stuck-switch-steps 256 \
+  --stuck-offset 12 \
+  --stuck-release-horizon-steps 0 \
+  --brick-balance-bias-min-score 1000000000 \
+  --late-game-paddle-lag-px 0 \
+  --trial-name repro_breakout_507 \
+  --log-path /tmp/repro_breakout_507.jsonl \
+  --summary-path /tmp/repro_breakout_507.csv
+</code></pre>
+<p>Expected output should include <code>score=507.0</code> and <code>mean=507.000</code>.</p>
+</details>
+<details>
+<summary>Reproduce 839: handle fast low balls</summary>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_839.jsonl /tmp/repro_breakout_839.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 27000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 3 \
+  --fast-low-ball-lead-steps 3 \
+  --stuck-trigger-steps 1024 \
+  --stuck-switch-steps 256 \
+  --stuck-offset 12 \
+  --stuck-release-horizon-steps 0 \
+  --brick-balance-bias-min-score 1000000000 \
+  --late-game-paddle-lag-px 0 \
+  --trial-name repro_breakout_839 \
+  --log-path /tmp/repro_breakout_839.jsonl \
+  --summary-path /tmp/repro_breakout_839.csv
+</code></pre>
+<p>Expected output should include <code>score=839.0</code> and <code>mean=839.000</code>.</p>
+</details>
+<h4 id="en-breakout-864"><a class="section-link" href="#en-breakout-864" aria-label="Link to Breakout 864">#</a>Breakout 864</h4>
+<p>Reproduction entrypoint: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout.py">heuristic_breakout.py</a>.</p>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_864.jsonl /tmp/repro_breakout_864.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 108000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 3 \
+  --fast-low-ball-lead-steps 3 \
+  --stuck-trigger-steps 1024 \
+  --stuck-switch-steps 256 \
+  --stuck-offset 12 \
+  --stuck-release-horizon-steps 8 \
+  --brick-balance-deadzone 0.01 \
+  --brick-balance-bias-min-score 432 \
+  --late-game-paddle-lag-px 2 \
+  --late-game-lag-ball-y 170 \
+  --trial-name repro_breakout_864 \
+  --log-path /tmp/repro_breakout_864.jsonl \
+  --summary-path /tmp/repro_breakout_864.csv
+</code></pre>
+<p>Expected output should include <code>score=864.0</code> and <code>mean=864.000</code>.</p>
+<h4 id="en-ant-default-mpc-policy"><a class="section-link" href="#en-ant-default-mpc-policy" aria-label="Link to Ant Default MPC Policy">#</a>Ant Default MPC Policy</h4>
+<p>Reproduction entrypoints: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant.py">heuristic_ant.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/ant_envpool.xml">ant_envpool.xml</a>.</p>
+<pre><code class="language-bash">rm -f /tmp/repro_ant_6146_eval5.jsonl /tmp/repro_ant_6146_eval5.csv
+python mujoco/ant/heuristic_ant.py \
+  --policy mpc \
+  --episodes 5 \
+  --seed 0 \
+  --max-steps 1000 \
+  --mujoco-xml-path mujoco/ant/ant_envpool.xml \
+  --trial-name repro_ant_6146_eval5 \
+  --log-path /tmp/repro_ant_6146_eval5.jsonl \
+  --summary-path /tmp/repro_ant_6146_eval5.csv
+</code></pre>
+<p>My local rerun produced <code>mean=6005.521</code>, <code>min=5776.805</code>, and <code>max=6146.208</code>.</p>
+<h4 id="en-halfcheetah-staged-tree-mpc"><a class="section-link" href="#en-halfcheetah-staged-tree-mpc" aria-label="Link to HalfCheetah Staged-Tree MPC">#</a>HalfCheetah Staged-Tree MPC</h4>
+<p>Reproduction entrypoint: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_v5.py">heuristic_halfcheetah_v5.py</a>.</p>
+<pre><code class="language-bash">python mujoco/halfcheetah/heuristic_halfcheetah_v5.py \
+  --policy mpc-staged-tree-asym-pd-cpg \
+  --eval-episodes 5 \
+  --eval-seed 100
+</code></pre>
+<p>My local rerun produced a five-episode mean of <code>11836.693</code>.</p>
+<h4 id="en-vizdoom-d1-basic-cv-policy"><a class="section-link" href="#en-vizdoom-d1-basic-cv-policy" aria-label="Link to VizDoom D1 Basic CV Policy">#</a>VizDoom D1 Basic CV Policy</h4>
+<p>Reproduction entrypoint: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d1_cv.py">heuristic_vizdoom_d1_cv.py</a>.</p>
+<pre><code class="language-bash">python vizdoom/heuristic_vizdoom_d1_cv.py --episodes 10 --seed 0
+</code></pre>
+<p>My local rerun produced <code>mean=0.9440999741666019</code> and <code>min=0.28999998047947884</code>. This version depends only on pip EnvPool; it does not need the <code>vizdoom</code> Python package or any locally compiled extension.</p>
+<p>To regenerate the 35fps video:</p>
+<pre><code class="language-bash">python vizdoom/heuristic_vizdoom_d1_cv.py \
+  --episodes 10 \
+  --seed 0 \
+  --record-mp4 vizdoom/d1_cv_10seed_render_35fps.mp4
+</code></pre>
+<h4 id="en-vizdoom-d3-battle-cv-policy"><a class="section-link" href="#en-vizdoom-d3-battle-cv-policy" aria-label="Link to VizDoom D3 Battle CV Policy">#</a>VizDoom D3 Battle CV Policy</h4>
+<p>Reproduction entrypoints: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d3_cv.py">heuristic_vizdoom_d3_cv.py</a>, <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/record_vizdoom_d3_cv.py">record_vizdoom_d3_cv.py</a>.</p>
+<pre><code class="language-bash">python vizdoom/heuristic_vizdoom_d3_cv.py
+</code></pre>
+<p>My local rerun produced <code>mean=557.0</code> and <code>min=440.0</code>; the 10-seed rewards were <code>[545, 475, 480, 440, 690, 500, 600, 595, 530, 715]</code>.</p>
+<p>To regenerate the 35fps video:</p>
+<pre><code class="language-bash">python vizdoom/record_vizdoom_d3_cv.py
+</code></pre>
+<h4 id="en-montezuma-400-point-replay"><a class="section-link" href="#en-montezuma-400-point-replay" aria-label="Link to Montezuma 400-Point Replay">#</a>Montezuma 400-Point Replay</h4>
+<p>Reproduction entrypoint: <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_policy.py">heuristic_montezuma_400_policy.py</a>.</p>
+<pre><code class="language-bash">python atari/montezuma/heuristic_montezuma_400_policy.py \
+  --metadata-out /tmp/repro_montezuma_400.json
+</code></pre>
+<p>Expected output should include <code>"score": 400.0</code> and <code>"env_steps": 1769</code>. This is a boundary case; it should not be read as a general Montezuma policy.</p>
+<h2 id="en-section-13"><a class="section-link" href="#en-section-13" aria-label="Link to Comments">#</a>Comments</h2>
+<div class="github-issue-comments" data-lang="en" data-repo="Trinkle23897/learning-beyond-gradients" data-issue-url="https://github.com/Trinkle23897/learning-beyond-gradients/issues/new?title=Comment%3A%20Learning%20Beyond%20Gradients"></div>
+    </article>
+    <article id="article-zh" class="lang-pane" lang="zh-CN" hidden>
+<h1>Learning Beyond Gradients</h1>
+<blockquote>
+<p><a href="https://trinkle23897.github.io/cv/">Jiayi Weng</a></p>
+</blockquote>
+<nav class="toc" aria-label="目录">
+    <div class="toc-title">目录</div>
+    <ol>
+      <li class="toc-level-2"><a href="#zh-section-1">异常现象</a></li>
+      <li class="toc-level-2"><a href="#zh-section-2">Heuristic Learning</a></li>
+      <li class="toc-level-2"><a href="#zh-section-3">为什么 Heuristic Learning 以前没发展起来</a></li>
+      <li class="toc-level-2"><a href="#zh-section-4">Heuristic Learning 怎么做 Continual Learning</a></li>
+      <li class="toc-level-2"><a href="#zh-section-5">Heuristic System 的复杂度</a></li>
+      <li class="toc-level-2"><a href="#zh-section-6">下一个范式？</a></li>
+      <li class="toc-level-2"><a href="#zh-disclaimer">免责声明</a></li>
+      <li class="toc-level-2"><a href="#zh-acknowledgements">致谢</a></li>
+      <li class="toc-level-2"><a href="#zh-citation">引用</a></li>
+      <li class="toc-level-2"><a href="#zh-appendix">附录：实验过程和复现入口</a></li>
+      <li class="toc-level-3"><a href="#zh-section-a-1">A.1 实验过程简述</a></li>
+      <li class="toc-level-3"><a href="#zh-section-a-2">A.2 复现入口</a></li>
+      <li class="toc-level-2"><a href="#zh-section-13">评论</a></li>
+    </ol>
+  </nav>
+<p>Continual Learning 一直难以被解决，主要卡在神经网络的灾难性遗忘：学了新东西，旧能力就容易被冲掉。那如果不把目光只放在神经网络权重上，还有没有其他解决方案？</p>
+<p>随着 LLM agent 变强，coding 的速度和质量都在提升。但我最近更在意的是另一个现象：coding agent 不训练新网络、不更新权重，只是持续看失败、改代码、加测试、看回放，也能把一套程序系统越养越强。</p>
+<p>这让我重新看待 heuristic，也就是手写规则和程序策略。过去很多 heuristic 不是没用，而是没人养得起；coding agent 改变的是这条维护成本曲线。于是，过去只能当一次性补丁的规则，开始变成值得长期拥有的代码。</p>
+<p>凡是可以被持续迭代的，都开始能被解决。这也是 Continual Learning 一直想要解决的问题。它会是既 Pretrain、RLHF、Large-scale RL/RLVR 之后的下一个范式吗？</p>
+<h2 id="zh-section-1"><a class="section-link" href="#zh-section-1" aria-label="Link to 异常现象">#</a>异常现象</h2>
+<p>在业余时间维护 <a href="https://github.com/sail-sg/envpool">EnvPool</a> 的时候，我想用一个便宜一点的策略来测试游戏环境正确性，不然每次 CI 都跑神经网络，很费测试资源。</p>
+<p>一开始的问题只是：</p>
+<pre><code class="language-text">能不能写一些便宜、可复现、比随机强很多的 heuristic，
+专门把环境跑到有信息量的状态？
+</code></pre>
+<p>我试着使用 codex（gpt-5.4）写一个基于规则的版本，完全不依赖 NN。没想到弄了几下，结果比我预期离谱很多：</p>
+<ul>
+<li>一个打砖块游戏 Atari Breakout，策略从 <code>387 -&gt; 507 -&gt; 839 -&gt; 864</code>，最后打到理论最高分；</li>
+<li>一个仿真四足机器人关节控制任务 MuJoCo Ant，纯 Python 程序策略先学会节律步态，再接上短视窗模型规划，最后上了 <code>6000+</code> 分，进入常见 Deep RL 结果的量级；</li>
+<li>一个仿真机器人跑步任务 MuJoCo HalfCheetah，靠可解释的步态/姿态规则和在线规划，迭代到 5 局复测均值 <code>11836.7</code>，也进入了常见 Deep RL 结果的量级；</li>
+<li>一个第一人称视觉控制任务 VizDoom，只用 cv2/NumPy 搓屏幕 CV、不训练神经网络，D3 Battle 的 10 seeds 结果也能到 <code>mean=557.0</code>、<code>min=440.0</code>；</li>
+<li>一整套 Atari 57 个游戏，一共跑了 57 个游戏 x 2 种输入 x 3 次运行 = 342 条 coding-agent 搜索轨迹，表现有好有坏；但在固定环境交互步数下，中位数 HNS 游戏得分在 <code>1M</code> 环境步附近已经远高于 PPO 这类 Deep RL 算法的曲线。</li>
+</ul>
+<p>这些结果第一次见到十分震撼，更让我在意的是：codex 没有训练神经网络，它在维护一套还能继续生长的软件系统。</p>
+<p>Breakout 策略到最后远远超过一句“球在左边就往左”。这个策略长出来的是动作探测、状态读取、球和挡板检测、落点预测、卡住循环检测、回归测试、视频回放和实验记录。Ant 策略也超过一条步态公式，里面有节律控制、姿态反馈、接触信息、短视窗模型展开。</p>
+<p>于是我意识到有必要在这里创造一个新的概念：这里被更新的对象已经不只是策略函数，而是一套带有记忆、反馈入口和回归机制的软件系统。</p>
+<h2 id="zh-section-2"><a class="section-link" href="#zh-section-2" aria-label="Link to Heuristic Learning">#</a>Heuristic Learning</h2>
+<p>在接着和 codex 交流了一阵子之后，我想把这个过程定义为 <strong>Heuristic Learning（HL）</strong>：</p>
+<ul>
+<li>HL 的主体由程序代码构成；</li>
+<li>它和今天常见的 Deep RL 实践共享状态、动作、反馈、更新的闭环；但更新对象从神经网络参数换成了软件结构；</li>
+<li>它的反馈由 coding agent 消化，可以来自环境 reward、testcase、日志、视频、回放、人类反馈；</li>
+<li>它的更新不走反向传播；coding agent 直接修改 policy、状态检测器、测试、配置或者 memory；</li>
+<li>HL 是学习和更新的过程；被 HL 长期维护的对象称之为 <strong>Heuristic System（HS）</strong>；</li>
+<li>HS 超过一个孤立的 <code>policy.py</code>：它至少包含程序策略、状态表示、反馈入口、实验记录、回放或测试、memory，以及由 coding agent 执行的更新机制。单条 rule 不够，规则、反馈、历史和下一轮更新全部接起来，才称之为 HS。</li>
+</ul>
+<p>列一个表就是：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Deep RL</th>
+<th>HL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy（策略）</td>
+<td>由神经网络参数构成</td>
+<td>由代码构成，可以是代码规则、状态机、controller、MPC、宏动作</td>
+</tr>
+<tr>
+<td>State（状态）</td>
+<td>通常由显式观测表示</td>
+<td>通常显式写成变量、检测器、缓存等可表示的东西</td>
+</tr>
+<tr>
+<td>Action（动作）</td>
+<td>由神经网络一次 forward 生成</td>
+<td>执行代码逻辑生成</td>
+</tr>
+<tr>
+<td>Feedback（反馈）</td>
+<td>主要由固定 reward 提供</td>
+<td>由 coding agent 根据 context 提供，testcase、环境反馈、日志、回放都算 context</td>
+</tr>
+<tr>
+<td>Update（更新）</td>
+<td>由 Deep RL 算法对神经网络参数做梯度更新</td>
+<td>由 coding agent 直接修改代码</td>
+</tr>
+<tr>
+<td>Memory（历史记录）</td>
+<td>on-policy 基本没有，off-policy 有 replay buffer</td>
+<td>可以显式记录 trials、summary、失败原因、回放、版本 diff</td>
+</tr>
+</tbody>
+</table>
+<p>Heuristic Learning 相比 Deep RL 有很多良好的性质：</p>
+<ul>
+<li>可解释性（Explainability）：神经网络很难解释，HL 的代码策略可以翻译成人话；</li>
+<li>样本效率（Sample Efficiency）：一次有效代码更新可以直接跳到新策略，不用调学习率慢慢爬；</li>
+<li>可回归 / 可验证（Regression-testable）：旧能力可以变成 test、replay、golden case；</li>
+<li>可约束过拟合：代码 heuristic 也会过拟合到 seed、环境细节或测试漏洞，但简化、回归和多 seed 检查可以形成一种工程正则化；</li>
+<li>可以避免一部分灾难性遗忘（Catastrophic Forgetting）：旧能力不用全靠模型自己记住，可以被写进 rule set 和测试里。</li>
+</ul>
+<p>重点在于，有一类原来因为维护成本太高而不值得写的 heuristic，现在突然可能值得长期拥有了。</p>
+<h2 id="zh-section-3"><a class="section-link" href="#zh-section-3" aria-label="Link to 为什么 Heuristic Learning 以前没发展起来">#</a>为什么 Heuristic Learning 以前没发展起来</h2>
+<p>如果说 HL 的前身是专家系统、规则系统，那么在 coding agent 没发展起来之前，这玩意的维护成本十分高昂。</p>
+<p>人类手工维护 heuristic 很容易变成这样：</p>
+<pre><code class="language-text">今天加一条规则修 case A。
+明天发现 case B 被修坏了。
+后天再加一个 if。
+大后天没人敢删了。
+</code></pre>
+<p>问题不在 heuristic 没用，在没人力能养得起。之前人力维护专家系统，有点像工业革命前手工纺纱：规模一大，稳定性和维护成本就压死人。纺织机改变的是产能曲线；coding agent 改变的是 heuristic 的维护曲线。它像一条可以输送智力的营养管道，可以持续浇灌一个 HS，让它自己迭代进化。</p>
+<p><img alt="coding agent 把反馈接进软件生长" src="ig_0c2dd0d2f07176560169fbc256930481969d3c6ba3316d5486.png"></p>
+<p>目前常见的 agentic 反馈闭环主要是：</p>
+<pre><code class="language-text">feature request -&gt; agent 写代码 -&gt; 过 test -&gt; 人类给一点反馈 -&gt; 下一轮 patch
+</code></pre>
+<p>但随着大模型能力提升，人类介入次数会逐渐变少，这个反馈循环就有机会在某些边界明确的系统里自动闭合，从而能够实现自动化用 HL 批量生产 HS：</p>
+<pre><code class="language-text">环境反馈 / 测试失败 / 日志异常
+-&gt; coding agent 读 context
+-&gt; 修改 policy / test / memory
+-&gt; 重新运行
+-&gt; 把结果写回 trials 和 summary
+-&gt; 下一轮继续
+</code></pre>
+<h2 id="zh-section-4"><a class="section-link" href="#zh-section-4" aria-label="Link to Heuristic Learning 怎么做 Continual Learning">#</a>Heuristic Learning 怎么做 Continual Learning</h2>
+<p>神经网络里的灾难性遗忘，是新数据把参数往新任务推，旧能力被覆盖掉。HL 也会忘，例如：</p>
+<ul>
+<li>新规则修好了一个失败模式，同时破坏旧场景；</li>
+<li>新 memory 把 agent 反复带到错误方向；</li>
+<li>新测试太窄，导致策略学会钻空子；</li>
+<li>新 patch 改了公共接口，旧调用方悄悄坏掉；</li>
+<li>规则越堆越多，最后 agent 自己也维护不动。</li>
+</ul>
+<p>所以 HL 不会自动解决 Continual Learning。它把“防遗忘”变成了更工程化的东西。</p>
+<p>在 HL 里，旧能力可以被固化成：</p>
+<ul>
+<li>回归测试；</li>
+<li>固定 seed 的 replay；</li>
+<li>golden trace；</li>
+<li>失败视频；</li>
+<li>版本 diff；</li>
+<li>明确写下来的失败方向。</li>
+</ul>
+<p>与神经网络把经验压进权重完全不一样：HL 的历史是显式、可读、可删、可重构的。它负责“记住”，也负责把一堆局部补丁压缩成更简单的表示。</p>
+<p>（只增长不压缩的 HS，最后一定会变成屎山代码。它会“记住”很多东西，但记住的方式太差，导致谁也不敢动，从而腐化）</p>
+<p>所以一个健康的 HS 至少需要两个操作维持：</p>
+<ol>
+<li>吸收反馈：把新失败、新日志、新 reward 写回系统。</li>
+<li>压缩历史：把一堆局部补丁折回更简单、更可维护的表示。</li>
+</ol>
+<p>这就把 Continual Learning 从“怎么更新参数”变成了“怎么维护一个持续吸收反馈的软件系统”。</p>
+<h2 id="zh-section-5"><a class="section-link" href="#zh-section-5" aria-label="Link to Heuristic System 的复杂度">#</a>Heuristic System 的复杂度</h2>
+<p>此处定义 <strong>耦合复杂度</strong> 为 coding agent 能维护多复杂的策略来支持 HL。展开说，就是一次更新必须同时照顾多少相互牵连的状态、规则、测试、反馈和历史。</p>
+<p>这个量不能按代码行数算。一个 500 行策略，如果模块边界清楚、测试完整、状态可复现，可能很好维护；一个 80 行策略，如果每行都互相牵制、没有日志、没有回放，也可能是个定时炸弹，一碰就崩。</p>
+<p>朝代码一侧看，耦合复杂度受模块边界、接口稳定性、测试覆盖、日志观测性、回滚成本和状态可复现性限制。好的模块化会把全局耦合切成局部耦合，从而降低耦合复杂度；好的测试能让 coding agent 不必每次在脑子里模拟整个系统。</p>
+<p>朝 coding agent 一侧看，能接受多少耦合复杂度，取决于模型能力、上下文长度、memory 质量、工具质量、整体迭代速度。更强的模型能够同时处理更多相互作用；更长的上下文能让它少丢线索；memory 可以把跨轮次迭代经验留下；搜索、定位、运行、回放这些工具能够把一部分认知负担搬到外部。</p>
+<p>把这两侧放一起，可以得到一组判断：</p>
+<ul>
+<li>反馈越清楚，单位 agent 智力能维护的耦合复杂度越高；</li>
+<li>同等工具和反馈下，模型能力越强，能处理的耦合复杂度越高；</li>
+<li>模块化、测试、回放会把一部分耦合复杂度转移到环境里；</li>
+<li>memory 和工具会提高 agent 的有效上下文；</li>
+<li>只增长不压缩的 HS 会让耦合复杂度持续上升，直到超过维护能力。</li>
+</ul>
+<p>Breakout 策略能走到 <code>864</code> 的满分，有规则简单的一面，也有失败可以视频回放、局部复现、回归验证的一面。Ant 复杂得多，但它可以拆成节律、姿态、接触、residual MPC 这些模块。</p>
+<p>Montezuma 是一个很好的反例。Atari57 里有一条无人值守的记录到了 <code>400</code> 分，但那条路线由 <code>86</code> 个宏动作组成，基本是开环执行。这个例子说明，有些环境需要更强的程序形态，比如可组合宏动作、可恢复搜索状态、长期 memory。普通 <code>if else</code> 不能解决所有问题。</p>
+<h2 id="zh-section-6"><a class="section-link" href="#zh-section-6" aria-label="Link to 下一个范式？">#</a>下一个范式？</h2>
+<p>目前的范式转移是从最开始的 pretrain，到 RLHF，再变成 large-scale RL / RLVR。凡是可以验证的，都开始能被解决。</p>
+<p>Online Learning 和 Continual Learning 可以被当前 RLVR 生产出来的 agentic coding，通过 Heuristic Learning 的方式部分解决。从这个愿景出发，我愿称其为下一个范式：凡是可以被持续迭代的，都开始能被解决。</p>
+<p>为什么说是部分解决？因为 Heuristic Learning 并不能做所有神经网络能做的事情。它受制于代码的表达能力，比如复杂感知和长程泛化。比如在我目前认知范围内，我想不出有个 agent 能搓出一个纯 Python code、不用神经网络去解决 ImageNet。</p>
+<p>于是问题在于如何结合神经网络和 HL，同时解决 Online Learning 和 Continual Learning。最有希望的方向是：用 HL 处理在线数据快速生成在线经验，把在线经验内化成可训练、可回归、可筛选的数据，再周期性更新神经网络。</p>
+<p>以机器人为例，如果套用 System 1/2 的术语，一个可能的分工形态如下：</p>
+<ul>
+<li>专用、浅层 NN：当作 System 1 的一部分，快、便宜，负责感知、分类、物体状态估计；</li>
+<li>HL：也可以当作 System 1 的一部分，负责最新数据处理、规则、测试、回放、memory、安全边界、局部恢复；</li>
+<li>LLM agent：作为 System 2，负责给 HL 提供反馈、改进数据，并周期性提取 HL 生成的数据来更新自身。</li>
+</ul>
+<p>这套东西可以继续拆成层级结构：</p>
+<pre><code class="language-text">关节级 HL -&gt; 肢体级 HL -&gt; 全身平衡 HL -&gt; 任务级 HL
+</code></pre>
+<p>低层负责安全和低延迟控制，中层负责步态和接触，高层负责任务、恢复和长期记忆。coding agent 不一定直接“懂得走路”，它更像插进系统里的更新管线：持续把失败视频、传感器流、仿真结果、测试结果喂进系统，再把反馈改写成代码、参数、保护规则和 memory。</p>
+<p>LLM agent 可以共享，也可以相互隔离在机器人体内自行学习。这里的问题是：HL 提供的<em>特定数据分布</em>如何才能不让 LLM 的周期性更新崩溃。这是一个经典的 post-training 问题，已经有很多成熟经验，由于某些原因在这里就不展开了。</p>
+<p>Agentic coding 改变了写代码速度，也改写了哪些代码值得被长期拥有。</p>
+<p>过去很多 heuristic 看起来没有前途，原因常常落在维护成本上；它们本身未必太弱。coding agent 改变的是这条维护成本曲线。规则、测试、日志、memory 和补丁原来只是散落的工程材料，现在开始可以组成一个会持续更新的 Heuristic System，能够真正解决 Online Learning 和 Continual Learning 所未能解决的问题。</p>
+<p>欢迎来到下一个范式！</p>
+<h2 id="zh-disclaimer"><a class="section-link" href="#zh-disclaimer" aria-label="Link to 免责声明">#</a>免责声明</h2>
+<p>本文仅代表个人观点，不代表公司立场；文中讨论与任何公司具体项目、产品规划或内部工作无关。</p>
+<h2 id="zh-acknowledgements"><a class="section-link" href="#zh-acknowledgements" aria-label="Link to 致谢">#</a>致谢</h2>
+<p>感谢 <a href="https://costa.sh/">Costa Huang</a>、<a href="https://tairanhe.com/">Tairan He</a> 和 <a href="https://hsheng.org">Hao Sheng</a> 的反馈。</p>
+<h2 id="zh-citation"><a class="section-link" href="#zh-citation" aria-label="Link to 引用">#</a>引用</h2>
+<p>如果需要在 LaTeX 里引用这篇文章，可以用下面这个 BibTeX。</p>
+<pre><code class="language-bibtex">@misc{weng2026learning_beyond_gradients,
+  title = {Learning Beyond Gradients},
+  author = {Weng, Jiayi},
+  year = {2026},
+  month = may,
+  howpublished = {\url{https://trinkle23897.github.io/learning-beyond-gradients/}},
+  note = {Blog post}
+}
+</code></pre>
+<h2 id="zh-appendix"><a class="section-link" href="#zh-appendix" aria-label="Link to 附录：实验过程和复现入口">#</a>附录：实验过程和复现入口</h2>
+<p>完整 artifact repo 在 <a href="https://github.com/Trinkle23897/learning-beyond-gradients">https://github.com/Trinkle23897/learning-beyond-gradients</a>。下面命令默认你已经 clone 了这个 repo，并在仓库根目录运行；GitHub Pages 只展示文章和必要静态文件，完整脚本、CSV、视频和实验材料都在 repo 里。</p>
+<p>以下实验中 codex 模型版本均为 gpt-5.4，最新版本模型尚未测试。以下实验报告均由 codex 自行攥写。</p>
+<h3 id="zh-section-a-1"><a class="section-link" href="#zh-section-a-1" aria-label="Link to A.1 实验过程简述">#</a>A.1 实验过程简述</h3>
+<p>一开始我直接问 Codex：“写一个能解决 Breakout 的策略。”效果一般。低分没有解释力：它不知道是动作语义错了、状态检测错了、评测设置错了，还是策略结构本身不行。后来我把任务改成另一种形式：别只交一个 <code>policy.py</code>，要维护完整闭环。</p>
+<p>闭环大概长这样：</p>
+<pre><code class="language-text">探测动作和观测
+-&gt; 写状态检测器
+-&gt; 写策略
+-&gt; 跑完整回合
+-&gt; 记录 trials.jsonl 和 summary.csv
+-&gt; 生成视频或曲线
+-&gt; 看失败模式
+-&gt; 改策略
+-&gt; 简化代码并做回归
+</code></pre>
+<p>到这里，任务的形状已经变了。最后产出的东西从一个策略文件，变成了一套还能继续改的实验系统。它有探测器，有记录，有回放，有失败模式，也有下一轮该怎么改的线索。</p>
+<h4 id="zh-breakout"><a class="section-link" href="#zh-breakout" aria-label="Link to Breakout">#</a>Breakout</h4>
+<p>相关 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout.py">heuristic_breakout.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_trials.jsonl">heuristic_breakout_trials.jsonl</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_trials_summary.csv">heuristic_breakout_trials_summary.csv</a>。</p>
+<p>Breakout 表面上是几何问题：球在哪里，挡板在哪里，球撞墙以后会落到哪里。麻烦在后半段。策略可以一直接到球，却不再打到新砖，分数卡在一个稳定循环里。</p>
+<p>Codex 第一轮先确认动作空间和观测形状，再从 RGB 画面里找挡板、球、砖块颜色，然后用这些图像标签去扫 128 个 RAM 字节。早期实验记录大概是这样：</p>
+<pre><code class="language-text">trial_name                 score   cumulative_env_steps   note
+shape_action_probe          -      32                     inspect obs/info/action
+ram_byte_corr_probe_v1      -      5,032                  correlate RAM bytes
+ram_fit_action_probe_v2     -      9,532                  action 2=right, 3=left
+baseline_v0                99      16,303                 initial RAM intercept
+tunnel0_v1                387      43,303                 no tunnel offset
+</code></pre>
+<p><code>387</code> 是第一个很容易骗过人的局部高分。策略已经能稳定接球，但它把球送进了一个周期：不会死，也不会继续清砖。人手写到这里，很容易继续调“接球精度”。Codex 看了视频和最后几十步轨迹后，把问题定位到球路缺少扰动。</p>
+<video controls src="atari/breakout/heuristic_breakout_score387_tunnel0_render210x160.mp4" width="360"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_score387_tunnel0_render210x160.mp4">heuristic_breakout_score387_tunnel0_render210x160.mp4</a>。</p>
+<p>第一个有效机制是打破循环：如果连续很久没有奖励，就在预测落点上周期性加偏移，把球从局部循环里打出去。这一改把分数从 <code>387</code> 推到 <code>507</code>。</p>
+<pre><code class="language-python">if steps_since_reward &gt;= stuck_trigger_steps:
+    phase = stuck_offset_index % 4
+    if phase == 0:
+        offset = +stuck_offset_px
+    elif phase == 1:
+        offset = -stuck_offset_px
+    elif phase == 2:
+        offset = +0.5 * stuck_offset_px
+    else:
+        offset = -0.5 * stuck_offset_px
+else:
+    offset = 0.0
+</code></pre>
+<video controls src="atari/breakout/heuristic_breakout_score507_stuckbreaker_render210x160.mp4" width="360"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_score507_stuckbreaker_render210x160.mp4">heuristic_breakout_score507_stuckbreaker_render210x160.mp4</a>。</p>
+<p>后来又遇到另一个失败模式：高速低位球如果按普通截距追，挡板会被过度前视带偏。Codex 加了 <code>fast_low_ball_lead_steps=3</code>，分数从 <code>507</code> 跳到 <code>839</code>。</p>
+<pre><code class="language-python">if vy &gt; 0.1 and ball_y &lt;= paddle_y:
+    steps_to_paddle = max((paddle_y - ball_y) / vy, 0.0)
+    intercept_x = reflect_position(ball_x + vx * steps_to_paddle)
+    target_x = intercept_x + stuck_offset
+elif vy &gt;= fast_ball_min_vy:
+    target_x = ball_x + fast_low_ball_lead_steps * vx
+else:
+    target_x = ball_x + chase_lead_steps * vx
+</code></pre>
+<video controls src="atari/breakout/heuristic_breakout_score839_fastlead_render210x160.mp4" width="360"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_score839_fastlead_render210x160.mp4">heuristic_breakout_score839_fastlead_render210x160.mp4</a>。</p>
+<p>从 <code>839</code> 到 <code>864</code>，更像是在照料一个已经变复杂的系统。Codex 试了死区、发球偏移、卡住偏移、砖块平衡偏置、前视步数，很多方向都没用。最后起作用的是一个后期条件：分数超过第一面墙以后，卡住偏移只在离挡板还远的时候生效；快接球时把偏移逐步收掉，不然最后几块砖阶段会把挡板带偏。同时它加了一个很小的挡板漂移补偿，用来补动作和挡板位置之间的一步延迟。</p>
+<pre><code class="language-python">if score &gt;= 432 and stuck_release_horizon_steps &gt; 0:
+    release_ratio = clip(steps_to_paddle / stuck_release_horizon_steps, 0.0, 1.0)
+    offset *= release_ratio
+
+if score &gt;= 432 and ball_y &gt;= 170 and last_action == RIGHT:
+    control_paddle_x = paddle_x + 2.0
+elif score &gt;= 432 and ball_y &gt;= 170 and last_action == LEFT:
+    control_paddle_x = paddle_x - 2.0
+</code></pre>
+<video controls src="atari/breakout/heuristic_breakout_ci3985ae2_score864_render210x160.mp4" width="360"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_ci3985ae2_score864_render210x160.mp4">heuristic_breakout_ci3985ae2_score864_render210x160.mp4</a>。</p>
+<p>最终 RAM 默认配置三局验证是 <code>864 / 864 / 864</code>。后面 Codex 又把同一套几何控制迁移回纯图像输入：不用 RAM，只用 RGB 分割找挡板、球和砖块平衡。纯图像版本先是 <code>310</code>，然后 <code>428</code>，最后把后期“卡住偏移逐步收掉”的阈值放低到全程生效，7 个策略本地回合后第一次到 <code>864</code>，对应 <code>14,504</code> 个策略本地环境步。</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout_sample_efficiency.png"><img alt="Breakout 样本效率" src="atari/breakout/heuristic_breakout_sample_efficiency.png"></a></p>
+<p>这里不能写成“纯图像从零 14.5K 步到满分”。真实过程是：Codex 先在 RAM 版本里摸出了几何控制、打破循环、后期收偏移这些结构；等结构稳定以后，再把状态读取层从 RAM 换成 RGB 检测器。纯图像的 <code>14.5K</code> 是迁移预算。</p>
+<h4 id="zh-ant-halfcheetah"><a class="section-link" href="#zh-ant-halfcheetah" aria-label="Link to Ant 和 HalfCheetah">#</a>Ant 和 HalfCheetah</h4>
+<p>相关 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant.py">heuristic_ant.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/ant_envpool.xml">ant_envpool.xml</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_trials.jsonl">heuristic_ant_trials.jsonl</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_trials_summary.csv">heuristic_ant_trials_summary.csv</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_v5.py">heuristic_halfcheetah_v5.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_v5_log.md">heuristic_halfcheetah_v5_log.md</a>。</p>
+<p>Ant 的信号和 Breakout 不一样。Breakout 的几何结构很直观；Ant 是连续控制，动作是 8 个关节，失败模式也从“球没接到”变成了身体动力学问题。</p>
+<p>我没有一开始就指定“用 CPG”或“用 MPC”。要求只有几条：别训练神经网络，能本地复现，每轮实验留下记录，继续把分数往上推。Codex 先读 EnvPool/Gymnasium 的 Ant 观测和回报，确认动作顺序、根部速度、躯干朝向、关节位置和关节速度，然后自己提出第一版节律步态。</p>
+<p>第一版是四腿相位振荡器：左右腿反相，髋关节和踝关节跟踪正弦目标角，动作由 PD 控制器给出。它不优雅，但一上来就比随机强很多，5 个随机种子的平均分是 <code>2291</code>。</p>
+<pre><code class="language-python">leg_phase = warp_phase(phase + LEG_PHASE, stance_duty(vx))
+stance = leg_phase &lt; pi
+
+hip_wave = HIP_BIAS + stance_or_swing_scale * (
+    HIP_AMP * sin(leg_phase)
+    + HIP_H2_AMP * sin(2 * leg_phase + HIP_H2_PHASE)
+    + HIP_H3_AMP * sin(3 * leg_phase + HIP_H3_PHASE)
+)
+
+action[0::2] = KP * (
+    HIP_SIGN * hip_wave
+    + HEADING_AXIS * (YAW_GAIN * yaw + YAW_RATE_GAIN * yaw_rate)
+    - q[0::2]
+)
+action[1::2] = KP * (ANKLE_SIGN * (ankle_wave + balance) - q[1::2])
+</code></pre>
+<p>后面的早期迭代很像调一个真实控制器：先加偏航反馈到 <code>2718</code>，再调相位速度、髋/踝幅度、偏航角速度增益到 <code>3025</code>，然后加二阶/三阶谐波到 <code>3162</code>。Codex 也试过大范围参数搜索，但结果没有稳定超过当前节律策略，于是停止扩大搜索预算，转向另一种表示。</p>
+<p>跃迁来自 residual MPC。粗略讲，MPC 是“边走边想一小段未来”：保留节律步态作为基础反射，每个真实环境步在本地 MuJoCo 模型里采样几十条小的残差动作序列，打分后只执行第一个残差动作；下一步重新看状态、重新规划，并把上一轮没执行完的计划作为热启动。</p>
+<p>这样每一步都不用从零规划 8 个关节怎么动。策略先有一个稳定步态，再用短视窗模型规划去修正它。</p>
+<pre><code class="language-python">base = cpg_action(phase, q, dq, roll, pitch, yaw, rates, contacts, vx)
+
+best_plan = previous_plan.copy()
+best_obj = rollout_objective(obs, best_plan)
+for _ in range(CANDIDATES - 1):
+    residuals = clip(
+        best_plan + rng.normal(0.0, MPC_SIGMA, size=(HORIZON, 8)),
+        -MPC_CLIP,
+        MPC_CLIP,
+    )
+    residuals[1:] = 0.6 * residuals[1:] + 0.4 * residuals[:-1]
+    obj = rollout_objective(obs, residuals)
+    if obj &gt; best_obj:
+        best_obj = obj
+        best_plan = residuals
+
+plan[:-1] = PLAN_DECAY * best_plan[1:]
+return clip(base + best_plan[0], -1.0, 1.0)
+</code></pre>
+<pre><code class="language-text">trial_name                               score_mean   cumulative_env_steps   note
+ant_lr_cpgpd_v1                         2291.9       5,000                  左右腿反相 CPG + PD
+ant_yawaxis_grid_v2                     2857.9       20,000                 偏航反馈 + 重调参数
+ant_h3_428_v1                           3162.0       50,000                 二阶/三阶谐波
+ant_mpc_residual_v1_ep1                 3635.5       62,000                 视窗=6，候选=32
+ant_mpc_residual_cfg4_eval5             3964.7       67,000                 视窗=8，候选=48
+ant_mpc_residual_cand07_eval5           4647.1       73,000                 围绕 MPC 配置做局部搜索
+ant_mpc_residual_narrow04_eval5         4871.3       79,000                 降低 z 目标，增大 kp/候选数
+ant_mpc_residual_warm02_eval5           5165.2       85,000                 热启动残差计划
+ant_mpc_fast065x060_sigma008_clip012    5759.4       95,000                 更快步态 + 更大残差
+ant_mpc_term001_ep1                     6054.5       100,000                终端速度代价
+ant_mpc_default_adaptive_ep1            6146.2       106,300                速度自适应相位 + 支撑期
+</code></pre>
+<p>到最后，策略里有振荡器相位、支撑期比例、速度自适应、滚转/俯仰/偏航反馈、脚部接触、短视窗模型内展开、残差平滑、终端速度代价、热启动计划衰减。人类当然能写其中一两个模块，但要在短时间内同时照顾实验记录、代码、视频和失败方向，难度完全不同。</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_sample_efficiency.png"><img alt="Ant 样本效率" src="mujoco/ant/heuristic_ant_sample_efficiency.png"></a></p>
+<video controls src="mujoco/ant/heuristic_ant_mpc_default_6146_render480.mp4" width="480"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant_mpc_default_6146_render480.mp4">heuristic_ant_mpc_default_6146_render480.mp4</a>。</p>
+<p>HalfCheetah 是同一类证据的另一个点。我重新跑了 <code>mpc-staged-tree-asym-pd-cpg</code> 的 5 局复测，seeds <code>100..104</code> 的结果是均值 <code>11836.7</code>、最小值 <code>11735.0</code>、最大值 <code>12041.2</code>。策略靠的是可解释的步态/姿态规则和在线 staged-tree MPC：先用 CPG/PD 形成高分步态，再用短视窗模型评分和 staged swing-amplitude schedule 修正动作。</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_sample_efficiency.png"><img alt="HalfCheetah 样本效率" src="mujoco/halfcheetah/heuristic_halfcheetah_sample_efficiency.png"></a></p>
+<h4 id="zh-vizdoom"><a class="section-link" href="#zh-vizdoom" aria-label="Link to VizDoom">#</a>VizDoom</h4>
+<p>相关 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d1_cv.py">heuristic_vizdoom_d1_cv.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d3_cv.py">heuristic_vizdoom_d3_cv.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/record_vizdoom_d3_cv.py">record_vizdoom_d3_cv.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d1_cv_10seed_render_35fps.mp4">d1_cv_10seed_render_35fps.mp4</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d3_cv_best_10seed_render_35fps.mp4">d3_cv_best_10seed_render_35fps.mp4</a>。</p>
+<p>D1 Basic 是先验证“只要能等到合适时机吃血包，reward 就接近上限”的小实验。我先用 object/info 版本确认行为上限，10 seeds 接近 <code>1.01</code>；然后把不可复现的信息删掉，只保留 pip EnvPool、<code>render()</code> 屏幕像素和公开的 <code>HEALTH</code>。最终纯 CV 版用亮度阈值、形态学 close/dilate 和连通域找 medikit，用 bbox 中心决定转向/前进；血量还高且离血包太近时先 staging，等掉血后再吃。10 seeds 是 <code>mean=0.9441</code>、<code>min=0.2900</code>。</p>
+<video controls src="vizdoom/d1_cv_10seed_render_35fps.mp4" width="480"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d1_cv_10seed_render_35fps.mp4">d1_cv_10seed_render_35fps.mp4</a>。</p>
+<p>D3 Battle 更接近 FPS smoke policy：它不是背地图，而是把行为拆成三个闭环：看见怪就杀、低血/低弹时找补给、长时间没目标时高速探索。屏幕侧用 cv2/NumPy 做颜色阈值和连通域，提取 enemy candidate、ammo/health item candidate、墙面/洞口的暗区比例；EnvPool info 只用公开 game variables，比如 <code>HEALTH</code>、<code>AMMO2</code>、<code>HITCOUNT</code>、<code>DAMAGECOUNT</code>、<code>KILLCOUNT</code>。迭代方式是每次并行跑 10 个 seed，再直接用 <code>render()</code> 录 35fps 10-grid 视频看失败类型。早期试过地图、object info 和 seed 特判，后面都删掉了；保留下来的是屏幕 CV + 公开变量的闭环控制。10 seeds 是 <code>mean=557.0</code>、<code>min=440.0</code>。</p>
+<video controls src="vizdoom/d3_cv_best_10seed_render_35fps.mp4" width="480"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/d3_cv_best_10seed_render_35fps.mp4">d3_cv_best_10seed_render_35fps.mp4</a>。</p>
+<h4 id="zh-atari57"><a class="section-link" href="#zh-atari57" aria-label="Link to Atari57">#</a>Atari57</h4>
+<p>相关 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_prompt_template.txt">atari57_prompt_template.txt</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_aggregate_curve_steps.csv">atari57_aggregate_curve_steps.csv</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_env_mode_summary.csv">atari57_env_mode_summary.csv</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/openrl_atari57_per_game_hns_comparison.csv">openrl_atari57_per_game_hns_comparison.csv</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_hns_normalization_inferred.csv">atari57_hns_normalization_inferred.csv</a>。</p>
+<p>Breakout 和 Ant 都是单点故事。Atari57 想看的，是这套工作流离开单个漂亮案例以后还剩多少。做法很直接：把同一套 Codex 流程扔到整套 Atari57 上，每个环境同时跑 <code>ram</code> 和 <code>native_obs</code> 两种输入，每种输入跑 3 个独立重复。总共是：</p>
+<pre><code class="language-text">57 个游戏 x 2 种输入 x 3 次运行 = 342 条 coding-agent 搜索轨迹
+</code></pre>
+<p>这组实验没有人在旁边一点点提示。每个 agent 拿到同一个模板和不同的 <code>ENV_ID / OBS_MODE / REPEAT_INDEX</code>，然后自己执行到停止。每个 run 都要写 <code>policy.py</code>、<code>trials.jsonl</code>、<code>summary.csv</code>、<code>sample_efficiency.png</code> 和 <code>README.md</code>。</p>
+<p>完整提示词放在 <a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_prompt_template.txt">atari57_prompt_template.txt</a>。核心摘要是：</p>
+<details>
+<summary>Atari57 批量提示词摘要</summary>
+<pre><code class="language-text">目标：只针对一个 EnvPool Atari 环境，在给定 OBS_MODE 下自己设计并迭代手写 heuristic policy。
+
+模型运行方式：不要请求确认，不要输出中途汇报，直到满足停止规则后再总结。
+
+硬约束：
+- 不训练神经网络。
+- 不读环境源码、测试、ROM 细节或隐藏状态。
+- native_obs 模式只能用 reset/step 返回的原生 obs。
+- ram 模式可以用 info[&quot;ram&quot;]。
+- Atari 初始化参数固定，包括 frame_skip=1、reward_clip=False、sticky action=0。
+- 所有实际 step 过环境的 probe/debug/trial 都必须计入 cumulative_env_steps。
+
+输出文件：
+- policy.py：当前最好且尽量简化的 heuristic。
+- trials.jsonl：每次 trial 的分数、环境步、配置、备注。
+- summary.csv：从 trials 汇总。
+- sample_efficiency.png：按环境步和 episode 画分数曲线。
+- README.md：最好分数、复现命令、失败方向、停止原因。
+
+停止规则：
+- Atari frame budget = 20,000,000。
+- budget 前不要因为平台期或已经超过参考分数就停止。
+- 每次刷新 best score 后要进入代码简化阶段，确认不掉分再保留。
+</code></pre>
+</details>
+<p>先看环境步曲线。HNS 是 human-normalized score，也就是把每个游戏分数按人类基线归一化以后再比较。在完全无人工介入的批量运行里，<code>native_obs</code> 到 <code>1M</code> 步附近的 Atari median HNS 已经到 <code>0.32</code>，<code>ram</code> 是 <code>0.26</code>，明显高于图里 PPO2 / CleanRL EnvPool PPO 的早期曲线；到 <code>9.7M</code> 步附近，<code>native_obs</code> 是 <code>0.81</code>，<code>ram</code> 是 <code>0.59</code>。同一张对比里，OpenRL Benchmark 保存的 PPO2 / CleanRL EnvPool PPO median HNS 曲线到 <code>10M</code> 步大约是 <code>0.88 / 0.92</code>。</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_openrl_sample_efficiency_context.png"><img alt="Atari57 样本效率对比 OpenRL Benchmark" src="atari/atari57/atari57_openrl_sample_efficiency_context.png"></a></p>
+<p>这里比较的是环境交互效率；coding agent 读日志、写代码和看视频的开销没有折算进总计算成本。它给出的信号很具体：一个还很粗糙的 coding agent 批量流程，在完全不看中途结果的情况下，已经能把 Atari57 的中位数推进到接近这些 baseline 的区间。</p>
+<p>如果换成每个游戏最终取 best input 的汇总口径，Codex median HNS 是 <code>0.83</code>，OpenAI Baselines PPO2 是 <code>0.80</code>，CleanRL EnvPool PPO 是 <code>0.98</code>；如果再放宽到 best single run，Codex median HNS 是 <code>1.18</code>。这个口径不能替代严格训练曲线比较，但能更直接地说明这批无人值守搜索最后覆盖到了什么水平。</p>
+<p>聚合曲线会把差异压到一个中位数里，所以我又看了每个游戏自己的 HNS。Breakout、Krull、DoubleDunk、Boxing、DemonAttack 这些游戏里，heuristic 和 Deep RL baseline 都能拿到明显高于人类基线的分数；Asterix、Jamesbond、Centipede、Bowling、Skiing、Tennis 这类游戏里 heuristic 相对突出；Atlantis、VideoPinball、UpNDown、Assault、RoadRunner、StarGunner 上 PPO 明显强很多。</p>
+<p><a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/atari57/atari57_per_game_hns_comparison.png"><img alt="Atari57 每个游戏 HNS 对比" src="atari/atari57/atari57_per_game_hns_comparison.png"></a></p>
+<p>Atari57 最有意思的地方，是样本效率的来源变了。传统神经网络 Atari 学习要在每个环境里从高维输入重新学表示、信用分配和动作含义；Codex 做的是把环境拆成可维护的小程序系统：射击游戏的瞄准/躲避，接球游戏的反弹，躲避游戏的位置规则，环境包装器细节，以及每个环境自己的失败实验记录。</p>
+<h4 id="zh-montezuma"><a class="section-link" href="#zh-montezuma" aria-label="Link to Montezuma">#</a>Montezuma</h4>
+<p>相关 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma.py">heuristic_montezuma.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_state_graph_search.py">heuristic_montezuma_state_graph_search.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_policy.py">heuristic_montezuma_400_policy.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_macros.json">heuristic_montezuma_400_macros.json</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_metadata.json">heuristic_montezuma_400_metadata.json</a>。</p>
+<p>有些环境不适合普通反应式启发式策略。Montezuma's Revenge 是典型例子。</p>
+<p>之前那轮单独搜 Montezuma 的状态图搜索能把钥匙距离从 <code>72</code> 推到 <code>28</code>，但奖励仍然是 <code>0</code>。后面 Atari57 的纯图像批量实验里，有一条无人值守 Codex run 到了 <code>400.0</code> 分：修复后的最佳回放是 <code>repair_replay_r1_t19734</code>，seed 是 <code>10001</code>，用了 <code>1769</code> 个环境步，本质是一条 <code>86</code> 个宏动作组成的开环路线。</p>
+<video controls src="atari/montezuma/montezuma_400_render_seed10001_h264.mp4" width="360"></video>
+
+<p>视频 artifact：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/montezuma_400_render_seed10001_h264.mp4">montezuma_400_render_seed10001_h264.mp4</a>。</p>
+<p>Montezuma 暴露的是表达力问题。普通 <code>policy.py</code> 状态机很难装下这类路线：动作必须对齐时机，失败后要能恢复，中间状态还要能重新进入计划。有些环境需要可组合宏动作、可恢复搜索状态，甚至需要一种比普通 <code>if else</code> 更适合长期规划的程序结构。</p>
+<p>这类失败对 HL 很有价值。它告诉我们边界在哪里，也提示下一层抽象大概该长什么样。有些反馈需要新的表示和新的程序形态，才进得了系统。Montezuma 指向的下一层接口，大概会包括宏动作、可恢复状态、搜索和长期记忆。</p>
+<h3 id="zh-section-a-2"><a class="section-link" href="#zh-section-a-2" aria-label="Link to A.2 复现入口">#</a>A.2 复现入口</h3>
+<p>下面这些命令默认在本文所在目录运行，依赖已经按 <code>requirements.txt</code> 装好，用来检查前面提到的几个代表性结果。</p>
+<h4 id="zh-pong-21"><a class="section-link" href="#zh-pong-21" aria-label="Link to Pong 21">#</a>Pong 21</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/pong/heuristic_pong.py">heuristic_pong.py</a>。</p>
+<pre><code class="language-bash">python atari/pong/heuristic_pong.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0
+</code></pre>
+<p>期望输出里应该包含 <code>episode=0 score=21.0</code> 和 <code>mean=21.000</code>。</p>
+<h4 id="zh-breakout-intermediate-nodes"><a class="section-link" href="#zh-breakout-intermediate-nodes" aria-label="Link to Breakout 中间节点">#</a>Breakout 中间节点</h4>
+<p>这些命令用来复现附录里 <code>387 -&gt; 507 -&gt; 839</code> 三个中间节点。它们不是最终策略，只是把每一步机制固定下来，方便看出分数是怎么长出来的。</p>
+<details>
+<summary>复现 387 分：只接球，不打破循环</summary>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_387.jsonl /tmp/repro_breakout_387.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 27000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 1000000000 \
+  --stuck-trigger-steps 1000000000 \
+  --stuck-switch-steps 0 \
+  --stuck-offset 0 \
+  --stuck-release-horizon-steps 0 \
+  --brick-balance-bias-min-score 1000000000 \
+  --late-game-paddle-lag-px 0 \
+  --trial-name repro_breakout_387 \
+  --log-path /tmp/repro_breakout_387.jsonl \
+  --summary-path /tmp/repro_breakout_387.csv
+</code></pre>
+<p>期望输出里应该包含 <code>score=387.0</code> 和 <code>mean=387.000</code>。</p>
+</details>
+<details>
+<summary>复现 507 分：加入卡住循环扰动</summary>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_507.jsonl /tmp/repro_breakout_507.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 27000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 1000000000 \
+  --stuck-trigger-steps 1024 \
+  --stuck-switch-steps 256 \
+  --stuck-offset 12 \
+  --stuck-release-horizon-steps 0 \
+  --brick-balance-bias-min-score 1000000000 \
+  --late-game-paddle-lag-px 0 \
+  --trial-name repro_breakout_507 \
+  --log-path /tmp/repro_breakout_507.jsonl \
+  --summary-path /tmp/repro_breakout_507.csv
+</code></pre>
+<p>期望输出里应该包含 <code>score=507.0</code> 和 <code>mean=507.000</code>。</p>
+</details>
+<details>
+<summary>复现 839 分：处理高速低位球</summary>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_839.jsonl /tmp/repro_breakout_839.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 27000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 3 \
+  --fast-low-ball-lead-steps 3 \
+  --stuck-trigger-steps 1024 \
+  --stuck-switch-steps 256 \
+  --stuck-offset 12 \
+  --stuck-release-horizon-steps 0 \
+  --brick-balance-bias-min-score 1000000000 \
+  --late-game-paddle-lag-px 0 \
+  --trial-name repro_breakout_839 \
+  --log-path /tmp/repro_breakout_839.jsonl \
+  --summary-path /tmp/repro_breakout_839.csv
+</code></pre>
+<p>期望输出里应该包含 <code>score=839.0</code> 和 <code>mean=839.000</code>。</p>
+</details>
+<h4 id="zh-breakout-864"><a class="section-link" href="#zh-breakout-864" aria-label="Link to Breakout 864">#</a>Breakout 864</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/breakout/heuristic_breakout.py">heuristic_breakout.py</a>。</p>
+<pre><code class="language-bash">rm -f /tmp/repro_breakout_864.jsonl /tmp/repro_breakout_864.csv
+python atari/breakout/heuristic_breakout.py \
+  --policy ram \
+  --episodes 1 \
+  --seed 0 \
+  --max-steps 108000 \
+  --deadband 3 \
+  --chase-lead-steps 6 \
+  --tunnel-offset 0 \
+  --launch-offset 24 \
+  --fast-ball-min-vy 3 \
+  --fast-low-ball-lead-steps 3 \
+  --stuck-trigger-steps 1024 \
+  --stuck-switch-steps 256 \
+  --stuck-offset 12 \
+  --stuck-release-horizon-steps 8 \
+  --brick-balance-deadzone 0.01 \
+  --brick-balance-bias-min-score 432 \
+  --late-game-paddle-lag-px 2 \
+  --late-game-lag-ball-y 170 \
+  --trial-name repro_breakout_864 \
+  --log-path /tmp/repro_breakout_864.jsonl \
+  --summary-path /tmp/repro_breakout_864.csv
+</code></pre>
+<p>期望输出里应该包含 <code>score=864.0</code> 和 <code>mean=864.000</code>。</p>
+<h4 id="zh-ant-mpc-default-policy"><a class="section-link" href="#zh-ant-mpc-default-policy" aria-label="Link to Ant 默认 MPC 策略">#</a>Ant 默认 MPC 策略</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/heuristic_ant.py">heuristic_ant.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/ant/ant_envpool.xml">ant_envpool.xml</a>。</p>
+<pre><code class="language-bash">rm -f /tmp/repro_ant_6146_eval5.jsonl /tmp/repro_ant_6146_eval5.csv
+python mujoco/ant/heuristic_ant.py \
+  --policy mpc \
+  --episodes 5 \
+  --seed 0 \
+  --max-steps 1000 \
+  --mujoco-xml-path mujoco/ant/ant_envpool.xml \
+  --trial-name repro_ant_6146_eval5 \
+  --log-path /tmp/repro_ant_6146_eval5.jsonl \
+  --summary-path /tmp/repro_ant_6146_eval5.csv
+</code></pre>
+<p>我本地重跑时是 <code>mean=6005.521</code>、<code>min=5776.805</code>、<code>max=6146.208</code>。</p>
+<h4 id="zh-halfcheetah-staged-tree-mpc"><a class="section-link" href="#zh-halfcheetah-staged-tree-mpc" aria-label="Link to HalfCheetah staged-tree MPC">#</a>HalfCheetah staged-tree MPC</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/mujoco/halfcheetah/heuristic_halfcheetah_v5.py">heuristic_halfcheetah_v5.py</a>。</p>
+<pre><code class="language-bash">python mujoco/halfcheetah/heuristic_halfcheetah_v5.py \
+  --policy mpc-staged-tree-asym-pd-cpg \
+  --eval-episodes 5 \
+  --eval-seed 100
+</code></pre>
+<p>我本地重跑时 5 局均值是 <code>11836.693</code>。</p>
+<h4 id="zh-vizdoom-d1-basic-cv-policy"><a class="section-link" href="#zh-vizdoom-d1-basic-cv-policy" aria-label="Link to VizDoom D1 Basic CV 策略">#</a>VizDoom D1 Basic CV 策略</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d1_cv.py">heuristic_vizdoom_d1_cv.py</a>。</p>
+<pre><code class="language-bash">python vizdoom/heuristic_vizdoom_d1_cv.py --episodes 10 --seed 0
+</code></pre>
+<p>我本地重跑时是 <code>mean=0.9440999741666019</code>、<code>min=0.28999998047947884</code>。这个版本只依赖 pip 的 EnvPool；不需要 <code>vizdoom</code> Python 包，也不需要任何本地编译扩展。</p>
+<p>要重新生成 35fps 视频：</p>
+<pre><code class="language-bash">python vizdoom/heuristic_vizdoom_d1_cv.py \
+  --episodes 10 \
+  --seed 0 \
+  --record-mp4 vizdoom/d1_cv_10seed_render_35fps.mp4
+</code></pre>
+<h4 id="zh-vizdoom-d3-battle-cv-policy"><a class="section-link" href="#zh-vizdoom-d3-battle-cv-policy" aria-label="Link to VizDoom D3 Battle CV 策略">#</a>VizDoom D3 Battle CV 策略</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/heuristic_vizdoom_d3_cv.py">heuristic_vizdoom_d3_cv.py</a>、<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/vizdoom/record_vizdoom_d3_cv.py">record_vizdoom_d3_cv.py</a>。</p>
+<pre><code class="language-bash">python vizdoom/heuristic_vizdoom_d3_cv.py
+</code></pre>
+<p>我本地重跑时是 <code>mean=557.0</code>、<code>min=440.0</code>，10 个 seed 的奖励是 <code>[545, 475, 480, 440, 690, 500, 600, 595, 530, 715]</code>。</p>
+<p>要重新生成 35fps 视频：</p>
+<pre><code class="language-bash">python vizdoom/record_vizdoom_d3_cv.py
+</code></pre>
+<h4 id="zh-montezuma-400-point-replay"><a class="section-link" href="#zh-montezuma-400-point-replay" aria-label="Link to Montezuma 400 分回放">#</a>Montezuma 400 分回放</h4>
+<p>复现入口：<a href="https://github.com/Trinkle23897/learning-beyond-gradients/blob/main/atari/montezuma/heuristic_montezuma_400_policy.py">heuristic_montezuma_400_policy.py</a>。</p>
+<pre><code class="language-bash">python atari/montezuma/heuristic_montezuma_400_policy.py \
+  --metadata-out /tmp/repro_montezuma_400.json
+</code></pre>
+<p>期望输出里应该包含 <code>"score": 400.0</code> 和 <code>"env_steps": 1769</code>。这条是边界案例，不要把它理解成通用 Montezuma 策略。</p>
+<h2 id="zh-section-13"><a class="section-link" href="#zh-section-13" aria-label="Link to 评论">#</a>评论</h2>
+<div class="github-issue-comments" data-lang="zh" data-repo="Trinkle23897/learning-beyond-gradients" data-issue-url="https://github.com/Trinkle23897/learning-beyond-gradients/issues/new?title=Comment%3A%20Learning%20Beyond%20Gradients"></div>
+    </article>
+  </main>
+  <script>
+(function () {
+  const panes = {
+    en: document.getElementById('article-en'),
+    zh: document.getElementById('article-zh'),
+  };
+  const buttons = {
+    en: document.getElementById('lang-en'),
+    zh: document.getElementById('lang-zh'),
+  };
+  const titles = {
+    en: 'Learning Beyond Gradients',
+    zh: 'Learning Beyond Gradients',
+  };
+  const storageKey = 'learning_beyond_gradient_lang_v1';
+  const themeStorageKey = 'learning_beyond_gradient_theme_v1';
+  const themeButton = document.getElementById('theme-toggle');
+
+  function preferredTheme() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function savedTheme() {
+    try {
+      const saved = window.localStorage.getItem(themeStorageKey);
+      if (saved === 'light' || saved === 'dark') return saved;
+    } catch (_) {}
+    return null;
+  }
+
+  function currentTheme() {
+    return savedTheme() || preferredTheme();
+  }
+
+  function setTheme(theme, persist) {
+    document.documentElement.dataset.theme = theme;
+    if (themeButton) {
+      themeButton.textContent = theme === 'dark' ? 'Light' : 'Dark';
+      themeButton.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+      themeButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    if (persist) {
+      try { window.localStorage.setItem(themeStorageKey, theme); } catch (_) {}
+    }
+  }
+
+  function setLanguage(lang, updateUrl) {
+    if (!panes[lang]) lang = 'en';
+    for (const key of Object.keys(panes)) {
+      const selected = key === lang;
+      panes[key].hidden = !selected;
+      buttons[key].classList.toggle('active', selected);
+      buttons[key].setAttribute('aria-pressed', selected ? 'true' : 'false');
+    }
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.title = titles[lang];
+    try { window.localStorage.setItem(storageKey, lang); } catch (_) {}
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      url.hash = lang === 'zh' ? 'zh' : '';
+      window.history.replaceState(null, '', url);
+    }
+  }
+
+  buttons.en.addEventListener('click', () => setLanguage('en', true));
+  buttons.zh.addEventListener('click', () => setLanguage('zh', true));
+  if (themeButton) {
+    themeButton.addEventListener('click', () => {
+      setTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
+    });
+  }
+
+  let initial = 'en';
+  if (window.location.hash === '#zh' || window.location.hash.startsWith('#zh-')) {
+    initial = 'zh';
+  } else if (window.location.hash === '#en' || window.location.hash.startsWith('#en-')) {
+    initial = 'en';
+  } else {
+    try {
+      const saved = window.localStorage.getItem(storageKey);
+      if (saved === 'en' || saved === 'zh') initial = saved;
+    } catch (_) {}
+  }
+  setLanguage(initial, false);
+  setTheme(currentTheme(), false);
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (!savedTheme()) setTheme(preferredTheme(), false);
+    });
+  }
+})();
+
+(function () {
+  const containers = Array.from(document.querySelectorAll('.github-issue-comments'));
+  if (!containers.length || !window.fetch) return;
+
+  const copy = {
+    en: {
+      title: 'Comments',
+      subtitle: 'Each GitHub issue is one comment, loaded live in your browser.',
+      newComment: 'Join discussion',
+      loading: 'Loading comments from GitHub...',
+      empty: 'No issues yet. Open one to start the thread.',
+      error: 'Could not load GitHub issues right now.',
+      reply: 'Reply',
+      viewThread: 'View thread',
+      replyLink: 'permalink',
+      powered: 'Powered by GitHub Issues',
+      replies: 'replies',
+      repliesError: 'Could not load replies.',
+    },
+    zh: {
+      title: '评论',
+      subtitle: '每个 GitHub issue 是一条评论，页面打开时动态加载。',
+      newComment: '参与讨论',
+      loading: '正在从 GitHub 加载评论...',
+      empty: '还没有 issue。开一个就会出现在这里。',
+      error: '现在没能加载 GitHub Issues。',
+      reply: '回复',
+      viewThread: '查看讨论',
+      replyLink: '链接',
+      powered: '由 GitHub Issues 驱动',
+      replies: '条回复',
+      repliesError: '没能加载这条下面的回复。',
+    },
+  };
+  const issueCommentRequests = new Map();
+
+  function t(lang) {
+    return copy[lang === 'zh' ? 'zh' : 'en'];
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function linkify(text) {
+    return escapeHtml(text).replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1">$1</a>'
+    );
+  }
+
+  function formatDate(value, lang) {
+    try {
+      return new Intl.DateTimeFormat(lang === 'zh' ? 'zh-CN' : 'en', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }).format(new Date(value));
+    } catch (_) {
+      return value ? value.slice(0, 10) : '';
+    }
+  }
+
+  function issueBody(issue) {
+    const body = (issue.body || '').trim();
+    return body;
+  }
+
+  function threadBody(comment) {
+    const body = (comment.body || '').trim();
+    return body;
+  }
+
+  function countLabel(count, lang) {
+    if (count === null) return t(lang).title;
+    if (lang === 'zh') return `${count} 条评论`;
+    return count === 1 ? '1 Comment' : `${count} Comments`;
+  }
+
+  function headerHtml(container, lang, count) {
+    const repo = container.dataset.repo || 'Trinkle23897/learning-beyond-gradients';
+    const issueUrl = container.dataset.issueUrl || `https://github.com/${repo}/issues/new?title=Comment%3A%20Learning%20Beyond%20Gradients`;
+    const text = t(lang);
+    return `<div class="github-comments-head">
+      <div>
+        <p class="github-comments-count">${escapeHtml(countLabel(count, lang))}</p>
+        <p class="github-comments-subtitle">${escapeHtml(text.subtitle)}</p>
+        <p class="github-comments-powered">${escapeHtml(text.powered)}</p>
+      </div>
+      <div class="github-comments-controls">
+        <a class="github-comments-new" href="${escapeHtml(issueUrl)}">${escapeHtml(text.newComment)}</a>
+      </div>
+    </div>`;
+  }
+
+  function sortIssues(issues) {
+    return [...issues].sort((a, b) => {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    });
+  }
+
+  function totalCommentCount(issues) {
+    return issues.reduce((count, issue) => {
+      const replies = Array.isArray(issue.threadComments) ? issue.threadComments.length : 0;
+      return count + 1 + replies;
+    }, 0);
+  }
+
+  function replyCountLabel(count, lang) {
+    const text = t(lang);
+    if (lang === 'zh') return `${count}${text.replies}`;
+    return count === 1 ? '1 reply' : `${count} ${text.replies}`;
+  }
+
+  function renderReply(comment, lang) {
+    const text = t(lang);
+    const user = comment.user && comment.user.login ? comment.user.login : 'github-user';
+    const avatarUrl = comment.user && comment.user.avatar_url ? comment.user.avatar_url : '';
+    const userUrl = comment.user && comment.user.html_url ? comment.user.html_url : comment.html_url;
+    const body = threadBody(comment);
+    return `<div class="github-reply">
+      ${avatarUrl ? `<img class="github-reply-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(user)} avatar" loading="lazy">` : '<div class="github-reply-avatar" aria-hidden="true"></div>'}
+      <div class="github-reply-main">
+        <div class="github-reply-byline">
+          <a class="github-reply-author" href="${escapeHtml(userUrl)}">${escapeHtml(user)}</a>
+          <span>${escapeHtml(formatDate(comment.created_at, lang))}</span>
+          <a href="${escapeHtml(comment.html_url)}">${escapeHtml(text.replyLink)}</a>
+        </div>
+        ${body ? `<div class="github-reply-body">${linkify(body)}</div>` : ''}
+      </div>
+    </div>`;
+  }
+
+  function renderReplies(issue, lang) {
+    const text = t(lang);
+    const replies = Array.isArray(issue.threadComments)
+      ? [...issue.threadComments].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+      : [];
+    if (issue.threadCommentsError) {
+      return `<div class="github-replies-error">${escapeHtml(text.repliesError)}</div>`;
+    }
+    if (!replies.length) return '';
+    return `<div class="github-replies">
+      ${replies.map((comment) => renderReply(comment, lang)).join('')}
+    </div>`;
+  }
+
+  function renderIssue(issue, lang) {
+    const text = t(lang);
+    const user = issue.user && issue.user.login ? issue.user.login : 'github-user';
+    const body = issueBody(issue);
+    const replies = Number(issue.comments) || 0;
+    const avatarUrl = issue.user && issue.user.avatar_url ? issue.user.avatar_url : '';
+    const userUrl = issue.user && issue.user.html_url ? issue.user.html_url : issue.html_url;
+    return `<article class="github-comment">
+      ${avatarUrl ? `<img class="github-comment-avatar" src="${escapeHtml(avatarUrl)}" alt="${escapeHtml(user)} avatar" loading="lazy">` : '<div class="github-comment-avatar" aria-hidden="true"></div>'}
+      <div class="github-comment-main">
+        <div class="github-comment-byline">
+          <a class="github-comment-author" href="${escapeHtml(userUrl)}">${escapeHtml(user)}</a>
+          <span>#${issue.number}</span>
+          <span>${escapeHtml(formatDate(issue.created_at, lang))}</span>
+        </div>
+        <h3 class="github-comment-title"><a href="${escapeHtml(issue.html_url)}">${escapeHtml(issue.title)}</a></h3>
+        ${body ? `<div class="github-comment-body">${linkify(body)}</div>` : ''}
+        <div class="github-comment-actions">
+          <a href="${escapeHtml(issue.html_url)}#new_comment_field">${escapeHtml(text.reply)}</a>
+          <a href="${escapeHtml(issue.html_url)}">${escapeHtml(text.viewThread)}</a>
+          ${replies ? `<span>${escapeHtml(replyCountLabel(replies, lang))}</span>` : ''}
+        </div>
+        ${renderReplies(issue, lang)}
+      </div>
+    </article>`;
+  }
+
+  function render(container, issues) {
+    const lang = container.dataset.lang || document.documentElement.lang || 'en';
+    const text = t(lang);
+    const comments = issues.filter((issue) => !issue.pull_request);
+    if (!comments.length) {
+      container.innerHTML = `${headerHtml(container, lang, 0)}<p class="github-comments-empty">${escapeHtml(text.empty)}</p>`;
+      return;
+    }
+    const sortedComments = sortIssues(comments);
+    container.innerHTML = `${headerHtml(container, lang, totalCommentCount(comments))}
+      <div class="github-comments-list">
+        ${sortedComments.map((issue) => renderIssue(issue, lang)).join('')}
+      </div>`;
+  }
+
+  const requests = new Map();
+  function fetchJson(url) {
+    return fetch(url, {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    }).then((response) => {
+      if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+      return response.json();
+    });
+  }
+
+  function issueCommentsUrl(issue) {
+    const url = new URL(issue.comments_url);
+    url.searchParams.set('per_page', '20');
+    return url.toString();
+  }
+
+  function fetchIssueComments(issue) {
+    if (!Number(issue.comments) || !issue.comments_url || issue.pull_request) {
+      return Promise.resolve({ ...issue, threadComments: [] });
+    }
+    const url = issueCommentsUrl(issue);
+    if (!issueCommentRequests.has(url)) {
+      issueCommentRequests.set(url, fetchJson(url));
+    }
+    return issueCommentRequests.get(url)
+      .then((comments) => ({
+        ...issue,
+        threadComments: Array.isArray(comments) ? comments : [],
+      }))
+      .catch(() => ({
+        ...issue,
+        threadComments: [],
+        threadCommentsError: true,
+      }));
+  }
+
+  function attachThreadComments(issues) {
+    return Promise.all(issues.map((issue) => fetchIssueComments(issue)));
+  }
+
+  function load(container) {
+    const repo = container.dataset.repo || 'Trinkle23897/learning-beyond-gradients';
+    const lang = container.dataset.lang || document.documentElement.lang || 'en';
+    const text = t(lang);
+    container.innerHTML = `${headerHtml(container, lang, null)}<p class="github-comments-status">${escapeHtml(text.loading)}</p>`;
+    if (!requests.has(repo)) {
+      const url = `https://api.github.com/repos/${repo}/issues?state=all&sort=created&direction=desc&per_page=30`;
+      requests.set(repo, fetchJson(url).then((issues) => {
+        const parsedIssues = Array.isArray(issues) ? issues : [];
+        return attachThreadComments(parsedIssues);
+      }));
+    }
+    requests.get(repo)
+      .then((issues) => {
+        const parsedIssues = Array.isArray(issues) ? issues : [];
+        render(container, parsedIssues);
+      })
+      .catch(() => {
+        container.innerHTML = `${headerHtml(container, lang, null)}<p class="github-comments-status">${escapeHtml(text.error)}</p>`;
+      });
+  }
+
+  containers.forEach(load);
+})();
+
+  </script>
+</body>
+</html>
